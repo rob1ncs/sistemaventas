@@ -1,0 +1,36 @@
+TEC
+ZONA
+CRITICIDAD
+REGION
+CRM
+RESPONSABLE BIT
+BANDERA
+RESP
+----
+CANT_CELDAS DEBE SER NUMERICO
+
+------------------------------------
+< 5 -verde
+
+entre 6 y 11 -amarillo
+
+> 12 -rojo
+------------------------------------
+
+redireccionar con el numero de bitacora a la pg
+* Mantener filtros al refrescar la pagina
+
+Ordenar datos al exportar a excel
+Agregar mas de dos filtros en los filtros
+
+
+*Copiar cron para que se ejecute cada 10 minutos y almacenar en tabla historica
+
+
+***********************************************
+-HERRAMIENTAS
+	-Panel Gestion Noc
+		-Panel
+		-Gracico NACIONAL
+		-Grafico CRM
+		-Ingreso contingencia
