@@ -11,17 +11,21 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -41,7 +45,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('LOOOOG') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
@@ -70,7 +74,32 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
+        <nav class="navbar navbar-expand-md navbar-inverse bg-white shadow-sm">
+
+                <div class="container-fluid links">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            &nbsp;CIISA&nbsp;
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Mantenedores <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ url('/productos') }}">Productos</a></li>
+                                        <li><a href="{{ url('/proveedores') }}">Proveedores</a></li>
+                                        <li><a href="{{ url('/categorias') }}">Categorias</a></li>
+                                    </ul>
+                            </li>
+                            <li><a href="#">Ventas</a></li>
+                            <li><a href="#">Page 3</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav> 
 
         <main class="py-4">
             @yield('content')

@@ -4,13 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Inicio</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
-        <style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        {{-- <style>
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -61,31 +64,54 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-        </style>
+        </style> --}}
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+            {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            CIISA
+                        </a>
+                        
+                      <ul class="nav navbar-nav mr-auto">
+                        <li><a href="{{ url('/productos') }}">Mantenedor de Producto</a></li>
+                        <li><a href="{{ url('/clientes') }}">Mantenodr de clientes</a></li>
+                        <li><a href="#">Page 3</a></li>
+                      </ul>
+                      
+                    </div>
+                </nav> --}}
+                <nav class="navbar navbar-expand-md navbar-inverse bg-white shadow-sm">
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                    <div class="container-fluid links">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="{{ url('/') }}">
+                                &nbsp;CIISA&nbsp;
+                            </a>
+                        </div>
+                        <div class="text-center">
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        Mantenedores <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ url('/productos') }}">Productos</a></li>
+                                            <li><a href="{{ url('/proveedores/create') }}">Proveedores</a></li>
+                                            <li><a href="{{ url('/categorias/create') }}">Categorias</a></li>
+                                        </ul>
+                                </li>
+                                <li><a href="#">Ventas</a></li>
+                                <li><a href="#">Page 3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav> 
+        {{-- <div class="flex-center position-ref full-height">
+            
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
+                    <a href="{{ url('/productos') }}">Productos</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://blog.laravel.com">Blog</a>
@@ -94,7 +120,11 @@
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+
+                <div class="title m-b-md">
+                    Laravel
+                </div>
             </div>
-        </div>
+        </div> --}}
     </body>
 </html>

@@ -15,7 +15,8 @@ class TblProveedorController extends Controller
     public function index()
     {
         //
-        return view('proveedores.index');
+        $datos['proveedores'] = tbl_proveedor::paginate(5);
+        return view('proveedores.index',$datos);
     }
 
     /**
@@ -41,7 +42,8 @@ class TblProveedorController extends Controller
         $datosProveedor=request()->except('_token');
 
         tbl_proveedor::insert($datosProveedor);
-        return response()->json($datosProveedor);
+        //return response()->json($datosProveedor);
+        return redirect('proveedores');
     }
 
     /**
@@ -61,9 +63,11 @@ class TblProveedorController extends Controller
      * @param  \App\tbl_proveedor  $tbl_proveedor
      * @return \Illuminate\Http\Response
      */
-    public function edit(tbl_proveedor $tbl_proveedor)
+    public function edit($id)
     {
         //
+        $proveedor= tbl_proveedor::findOrFail($id);
+        return view('proveedores.edit',compact('proveedor'));
     }
 
     /**
@@ -73,9 +77,14 @@ class TblProveedorController extends Controller
      * @param  \App\tbl_proveedor  $tbl_proveedor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tbl_proveedor $tbl_proveedor)
+    public function update(Request $request, $id)
     {
         //
+        $datosProveedor=request()->except(['_token','_method']);
+        tbl_proveedor::where('id','=',$id)->update($datosProveedor);
+
+        $proveedor= tbl_proveedor::findOrFail($id);
+        return redirect('proveedores');
     }
 
     /**
@@ -84,8 +93,10 @@ class TblProveedorController extends Controller
      * @param  \App\tbl_proveedor  $tbl_proveedor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tbl_proveedor $tbl_proveedor)
+    public function destroy($id)
     {
-        //
+        
+        tbl_proveedor::destroy($id);
+        return redirect('proveedores');
     }
 }
