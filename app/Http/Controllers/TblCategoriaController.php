@@ -15,7 +15,9 @@ class TblCategoriaController extends Controller
     public function index()
     {
         //
-        return view('categorias.index');
+        $datos['categorias'] = tbl_categoria::paginate(5);
+        return view('categorias.index',$datos);
+        
     }
 
     /**
@@ -41,7 +43,8 @@ class TblCategoriaController extends Controller
         $datosProveedor=request()->except('_token');
 
         tbl_categoria::insert($datosProveedor);
-        return response()->json($datosProveedor);
+        //return response()->json($datosProveedor);
+        return redirect('categorias');
     }
 
     /**
@@ -62,9 +65,11 @@ class TblCategoriaController extends Controller
      * @param  \App\tbl_categoria  $tbl_categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(tbl_categoria $tbl_categoria)
+    public function edit($id)
     {
         //
+        $categoria= tbl_categoria::findOrFail($id);
+        return view('categorias.edit',compact('categoria'));
         
     }
 
@@ -75,9 +80,13 @@ class TblCategoriaController extends Controller
      * @param  \App\tbl_categoria  $tbl_categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tbl_categoria $tbl_categoria)
+    public function update(Request $request, $id)
     {
-        //
+        $datosCategoria=request()->except(['_token','_method']);
+        tbl_categoria::where('id','=',$id)->update($datosCategoria);
+
+        $categoria= tbl_categoria::findOrFail($id);
+        return redirect('categorias');
     }
 
     /**
@@ -86,8 +95,9 @@ class TblCategoriaController extends Controller
      * @param  \App\tbl_categoria  $tbl_categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tbl_categoria $tbl_categoria)
+    public function destroy($id)
     {
-        //
+        tbl_categoria::destroy($id);
+        return redirect('categorias');
     }
 }

@@ -41,8 +41,8 @@ class TblProductoController extends Controller
         $datosProducto=request()->except('_token');
         
         tbl_producto::insert($datosProducto);
-        return (response()->json($datosProducto));
-        //return redirect('productos');
+        //return (response()->json($datosProducto));
+        return redirect('productos');
     }
 
     /**
