@@ -1,5 +1,9 @@
+@extends('layouts.app')
 
-
+@section('content')
+<div class="container">
+    <a href="{{ url('productos/create') }}">Agregar producto</a>
+<br>
 <table class="table table-light">
     <thead class="thead-light">
         <tr>
@@ -7,6 +11,7 @@
             <th>Nombre</th>
             <th>Descripcion</th>
             <th>precio</th>
+            <th>stock</th>
             
         </tr>
     </thead>
@@ -18,6 +23,7 @@
             <td>{{ $producto->nombre }}</td>
             <td>{{ $producto->descripcion }}</td>
             <td>{{ $producto->precio }}</td>
+            <td>{{ $producto->stock }}</td>
             <td>
                 <a href="{{ url('/productos/'.$producto->id.'/edit') }}">
                     editar
@@ -34,3 +40,6 @@
     @endforeach
     </tbody>
 </table>
+</div>
+
+@endsection

@@ -31,6 +31,7 @@ class CreateTblDetallesTable extends Migration
             $table->unsignedInteger('id_cliente');
             $table->date('fecha');
             $table->integer('total');
+            $table->string('medio_pago');
             $table->timestamps();
 
             $table->foreign('id_cliente')->references('id')->on('tbl_clientes');
@@ -41,6 +42,7 @@ class CreateTblDetallesTable extends Migration
             $table->string('nombre');
             $table->integer('telefono');
             $table->string('direccion');
+            $table->string('estado');
 
             $table->timestamps();
         });

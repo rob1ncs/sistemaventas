@@ -39,10 +39,10 @@ class TblProductoController extends Controller
     {
         //
         $datosProducto=request()->except('_token');
-
+        
         tbl_producto::insert($datosProducto);
         return (response()->json($datosProducto));
-
+        //return redirect('productos');
     }
 
     /**
@@ -75,9 +75,15 @@ class TblProductoController extends Controller
      * @param  \App\tbl_producto  $tbl_producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tbl_producto $tbl_producto)
+    public function update(Request $request, $id)
     {
-        //
+        $datosProducto=request()->except(['_token','_method']);
+        tbl_producto::where('id','=',$id)->update($datosProducto);
+
+        $producto= tbl_producto::findOrFail($id);
+        return redirect('productos');
+
+
     }
 
     /**
@@ -92,4 +98,6 @@ class TblProductoController extends Controller
         tbl_producto::destroy($id);
         return redirect('productos');
     }
+
+    
 }
