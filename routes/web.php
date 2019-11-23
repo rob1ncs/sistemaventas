@@ -22,3 +22,8 @@ Route::resource('productos', 'TblProductoController');
 Route::resource('proveedores', 'TblProveedorController');
 Route::resource('categorias', 'TblCategoriaController');
 Route::resource('clientes', 'TblClienteController');
+Route::resource('facturas', 'TblFacturasController');
+
+Auth::routes(['register'=>false]);
+
+Route::get('/home', 'HomeController@index')->name('home');
