@@ -84,7 +84,7 @@
                         </a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-left">
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     Mantenedores <span class="caret"></span></a>
@@ -97,7 +97,9 @@
                             <li><a href="#">Ventas</a></li>
                             <li><a href="#">Page 3</a></li>
                         </ul>
+                        
                     </div>
+                    
                 </div>
             </nav> 
 

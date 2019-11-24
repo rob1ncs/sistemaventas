@@ -25,7 +25,9 @@ class TblProductoController extends Controller
      */
     public function create()
     {
-        //
+        //$proveedor['proveedor'] = tbl_proveedor::lists('nombre','id');
+        //$categoria['categoria'] = tbl_categoria::lists('nombre','id');
+        //return view('productos.create',compact('proveedor','categoria'));
         return view('productos.create');
     }
 

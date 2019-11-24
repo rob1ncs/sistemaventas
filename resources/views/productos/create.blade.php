@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@inject('proveedores', 'App\Http\Controllers\TblProveedorController')
+@inject('categorias', 'App\Http\Controllers\TblCategoriaController')
+
 <div class="container">
     <form action="{{ url('/productos')}}" method="post">
         {{ csrf_field() }}
@@ -22,23 +25,28 @@
         <input type="number" name="stock" id="stock">
         <br>
         
-        <label for="id_categoria">{{ 'categoria' }}</label>
-        <select name="id_categoria" id="id_categoria">
-            <option value="0">Selecione categoria</option>
-            <option value="1">Categoria 1</option>
-            <option value="2">Categoria 2</option>
-        </select>
-        <br>
-    
         <label for="id_proveedor">{{ 'proveedor' }}</label>
         <select name="id_proveedor" id="id_proveedor">
-            <option value="0">Selecione proveedor</option>
-            <option value="1">proveedor 1</option>
-            <option value="2">proveedor 2</option>
+            @foreach ($proveedores->get() as $index =>$proveedor)
+                <option value="{{ $index }}" {{ old('id') == $index ? 'selected': '' }}>
+                    {{ $proveedor }}
+                </option>
+            @endforeach
         </select>
+        
+        <br>
+    
+        <label for="id_categoria">{{ 'categoria' }}</label>
+        <select name="id_categoria" id="id_categoria">
+                @foreach ($categorias->get() as $index =>$categoria)
+                    <option value="{{ $index }}" {{ old('id') == $index ? 'selected': '' }}>
+                        {{ $categoria }}
+                    </option>
+                @endforeach
+            </select>
         <br>
         <input type="submit" value="Agregar">
-        <a href="{{ url('productos') }}">Regresar</a>
+        <a class="btn btn-secondary" href="{{ url('productos') }}">Regresar</a>
     </form>
 </div>
 

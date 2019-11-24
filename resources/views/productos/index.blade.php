@@ -25,15 +25,13 @@
                             <td>{{ $producto->precio }}</td>
                             <td>{{ $producto->stock }}</td>
                             <td>
-                                <a href="{{ url('/productos/'.$producto->id.'/edit') }}">
+                                <a class="btn btn-primary" href="{{ url('/productos/'.$producto->id.'/edit') }}">
                                     editar
                                 </a>
-                                | 
-            
                                 <form method="post" action="{{ url('/productos/'.$producto->id) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-                                    <button type="submit" onclick="return confirm('¿ Desea borrar este producto ?')">Borrar</button>
+                                    <button class="btn btn-danger" type="submit" onclick="return confirm('¿ Desea borrar este producto ?')">Borrar</button>
                                 </form>
                             </td>
                         </tr>
