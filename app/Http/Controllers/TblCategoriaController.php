@@ -100,4 +100,14 @@ class TblCategoriaController extends Controller
         tbl_categoria::destroy($id);
         return redirect('categorias');
     }
+
+    public function get()
+    {
+        $categorias = tbl_categoria::get();
+        $categoriaArray[''] = 'Selecciona una categoria';
+        foreach($categorias as $cat){
+            $categoriaArray[$cat->id] = $cat->nombre;
+        }
+        return $categoriaArray; 
+    }
 }

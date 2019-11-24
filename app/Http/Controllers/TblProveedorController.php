@@ -99,4 +99,14 @@ class TblProveedorController extends Controller
         tbl_proveedor::destroy($id);
         return redirect('proveedores');
     }
+
+    public function get()
+    {
+        $proveedores = tbl_proveedor::get();
+        $proveedorArray[''] = 'Selecciona un proveedor';
+        foreach($proveedores as $prov){
+            $proveedorArray[$prov->id] = $prov->nombre;
+        }
+        return $proveedorArray; 
+    }
 }
