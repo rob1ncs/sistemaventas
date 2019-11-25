@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\tbl_producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TblProductoController extends Controller
 {
@@ -14,7 +15,8 @@ class TblProductoController extends Controller
      */
     public function index()
     {
-        $datos['productos'] = tbl_producto::paginate(5);
+        
+        $datos['productos'] = tbl_producto::get();
         return view('productos.index',$datos);
     }
 
@@ -25,9 +27,6 @@ class TblProductoController extends Controller
      */
     public function create()
     {
-        //$proveedor['proveedor'] = tbl_proveedor::lists('nombre','id');
-        //$categoria['categoria'] = tbl_categoria::lists('nombre','id');
-        //return view('productos.create',compact('proveedor','categoria'));
         return view('productos.create');
     }
 
@@ -99,6 +98,18 @@ class TblProductoController extends Controller
         //
         tbl_producto::destroy($id);
         return redirect('productos');
+    }
+
+    public function get(){
+        $datos['productos'] = tbl_producto::get();
+        return view('ventas.index',$datos);
+    }
+
+    public function ver($id)
+    {
+        //
+        $producto= tbl_producto::findOrFail($id);
+        return redirect('ventas.verproducto');
     }
 
     
