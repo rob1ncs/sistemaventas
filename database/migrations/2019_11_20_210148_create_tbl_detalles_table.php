@@ -20,6 +20,7 @@ class CreateTblDetallesTable extends Migration
             $table->string('apellido');
             $table->integer('telefono');
             $table->string('email');
+            $table->string('estado')->default('activo');
             $table->timestamps();
         });
 
@@ -42,7 +43,7 @@ class CreateTblDetallesTable extends Migration
             $table->string('nombre');
             $table->integer('telefono');
             $table->string('direccion');
-            $table->string('estado');
+            $table->string('estado')->default('activo');
 
             $table->timestamps();
         });
@@ -51,6 +52,7 @@ class CreateTblDetallesTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('descripcion');
+            $table->string('estado')->default('activo');
             $table->timestamps();
         });
 
@@ -61,6 +63,8 @@ class CreateTblDetallesTable extends Migration
             $table->string('descripcion');
             $table->integer('precio');
             $table->integer('stock');
+            $table->string('foto');
+            $table->string('estado')->default('activo');
 
             $table->unsignedInteger('id_categoria');
             $table->unsignedInteger('id_proveedor');
