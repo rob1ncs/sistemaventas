@@ -24,6 +24,10 @@
         <label for="stock">{{ 'stock' }}</label>
         <input type="number" name="stock" id="stock">
         <br>
+
+        <label for="foto">{{ 'foto' }}</label>
+        <input type="file" name="foto" id="foto">
+        <br>
         
         <label for="id_proveedor">{{ 'proveedor' }}</label>
         <select name="id_proveedor" id="id_proveedor">

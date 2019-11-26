@@ -41,6 +41,10 @@ class TblProductoController extends Controller
         //
         $datosProducto=request()->except('_token');
         
+        if($request->hasFile('foto')){
+            
+            $datosProducto['foto']=$request->file('foto')-store('uploads','public');
+        }
         tbl_producto::insert($datosProducto);
         //return (response()->json($datosProducto));
         return redirect('productos');

@@ -15,6 +15,7 @@
             <label for="direccion">{{ 'direccion' }}</label>
             <input type="text" name="direccion" id="direccion">
             <br>
+
         
             <input type="submit" value="Agregar">
             <a href="{{ url('proveedores') }}">Regresar</a>
