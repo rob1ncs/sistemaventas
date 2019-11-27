@@ -20,6 +20,10 @@
 //Route::get('/', 'TblProductoController@get');
 
 Route::get('/', 'TblProductoController@get');
+Route::get('/desactivar/{id}','TblProductoController@estado_desactivado');
+Route::get('/activar/{id}','TblProductoController@estado_activo');
+Route::get('/ver/{id}','TblProductoController@ver');
+
 Route::resource('productos', 'TblProductoController');
 Route::resource('proveedores', 'TblProveedorController');
 Route::resource('categorias', 'TblCategoriaController');

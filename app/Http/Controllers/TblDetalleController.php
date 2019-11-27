@@ -15,6 +15,7 @@ class TblDetalleController extends Controller
     public function index()
     {
         //
+        
     }
 
     /**
@@ -36,6 +37,19 @@ class TblDetalleController extends Controller
     public function store(Request $request)
     {
         //
+
+        $datosProducto=request()->except('_token');
+        $id_factura = App::make('TblFacturasController')->getIndex();
+
+        $datos['detalle'] = tbl_detalle::get();
+        $id_detalle = $datos->$id_detalle;
+        
+        $datos['id']=$request->file('foto')-store('uploads','public');
+        
+
+        tbl_producto::insert($datosProducto);
+        //return (response()->json($datosProducto));
+        return redirect('productos');
     }
 
     /**
@@ -82,4 +96,6 @@ class TblDetalleController extends Controller
     {
         //
     }
+
+    
 }

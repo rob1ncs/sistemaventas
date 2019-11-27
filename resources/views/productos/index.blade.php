@@ -1,19 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="margin-top:80px;">
+<div class="container">
     <a href="{{ url('productos/create') }}">Agregar producto</a>
     <hr>
     <div class="table-responsive">
             <table class="table table-light table-hover table-condensed">
-
-                <thead class="thead-light">
+                <thead>
                     <tr>
-                        <th>#</th>
+                        <th>Item</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
                         <th>precio</th>
                         <th>stock</th>
+                        <th>estado</th>
+                        <th></th>
+                        <th></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -24,16 +27,28 @@
                             <td>{{ $producto->descripcion }}</td>
                             <td>{{ $producto->precio }}</td>
                             <td>{{ $producto->stock }}</td>
+                            <td>{{ $producto->estado }}</td>
                             <td>
                                 <a class="btn btn-primary" href="{{ url('/productos/'.$producto->id.'/edit') }}">
                                     editar
                                 </a>
-                                <form method="post" action="{{ url('/productos/'.$producto->id) }}">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                    <button class="btn btn-danger" type="submit" onclick="return confirm('¿ Desea borrar este producto ?')">Borrar</button>
-                                </form>
                             </td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ url('/desactivar/'.$producto->id) }}">
+                                    desactivar
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ url('/activar/'.$producto->id) }}">
+                                    activar
+                                </a>
+                            </td>
+                                {{-- {{ url('/productos/'.$producto->id) }} --}}
+                                {{-- <form method="post" action="{{ url('/productos/'.$producto->id.'/estado_desactivado') }}">
+                                    {{ csrf_field() }}
+                                    <button class="btn btn-danger" type="submit" onclick="return confirm('¿ Desea borrar este producto ?')">Borrar</button>
+                                </form> --}}
+                            
                         </tr>
                     @endforeach
                 </tbody>

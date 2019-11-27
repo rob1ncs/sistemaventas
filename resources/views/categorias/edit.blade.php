@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" id="contenedor" style="margin-top: 80px;">
         <form action="{{ url('/categorias/'.$categoria->id)}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}

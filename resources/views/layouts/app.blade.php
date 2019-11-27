@@ -18,7 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link src="{{ asset('public/styles.css') }}" rel="stylesheet">
+    {{-- <link src="{{ asset('public/styles.css') }}" rel="stylesheet"> --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -27,7 +28,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-inverse bg-white shadow-sm navbar-fixed-top">
+        <nav class="navbar navbar-expand-md navbar-inverse bg-white shadow-sm navbar-fixed-top" style="margin-bottom: 20px;">
                 <div class="container-fluid links">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="{{ url('/') }}">

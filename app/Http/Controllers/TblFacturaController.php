@@ -15,6 +15,10 @@ class TblFacturaController extends Controller
     public function index()
     {
         //
+        $datos = tbl_factura::get();
+        
+        return (response()->json($datos));
+        //return view('productos.index',$datos);
     }
 
     /**
@@ -81,5 +85,16 @@ class TblFacturaController extends Controller
     public function destroy(tbl_factura $tbl_factura)
     {
         //
+    }
+
+    public function get_id()
+    {
+        //
+        //$datos['factura'] = tbl_factura::get();
+        //$datos = tbl_factura::where('id','>',0)->first();
+        $results = tbl_factura::select('SELECT MAX(id) FROM tbl_factura');
+
+        return (response()->json($results));
+        //return view('productos.index',$datos);
     }
 }

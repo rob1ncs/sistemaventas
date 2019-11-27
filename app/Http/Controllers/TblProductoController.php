@@ -17,6 +17,7 @@ class TblProductoController extends Controller
     {
         
         $datos['productos'] = tbl_producto::get();
+        //tbl_producto::where('estado','=',"activo");
         return view('productos.index',$datos);
     }
 
@@ -69,7 +70,7 @@ class TblProductoController extends Controller
      */
     public function edit($id)
     {
-        $producto= tbl_producto::findOrFail($id);
+        $producto = tbl_producto::findOrFail($id);
         return view('productos.edit',compact('producto'));
     }
 
@@ -112,9 +113,37 @@ class TblProductoController extends Controller
     public function ver($id)
     {
         //
-        $producto= tbl_producto::findOrFail($id);
-        return redirect('ventas.verproducto');
+        $producto = tbl_producto::findOrFail($id);
+        return (response()->json($producto));
+        //return redirect('ventas.verproducto');
     }
 
-    
+    public function estado_desactivado($id)
+    {
+        $datosProducto=request()->except(['_token','_method']);
+        $estado = tbl_producto::where('id','=',$id)->first();
+        $estado->estado = "desactivado";
+        $estado->save();
+
+        $producto = tbl_producto::where('estado','=',"activo");
+        return redirect('productos');
+
+
+    }
+
+    public function estado_activo($id)
+    {
+        //$id_factura = App::make('TblFacturasController')->getIndex();
+        $id_factura = (new TblFacturaController)->get_id();
+        //$datosProducto=request()->except(['_token','_method']);
+        //$estado = tbl_producto::where('id','=',$id)->first();
+        //$estado->estado = "activo";
+        //$estado->save();
+        //$id_f = $id_factura->id;
+        
+        return (response()->json($id_factura));
+        //return redirect('productos');
+
+
+    }
 }
