@@ -92,7 +92,9 @@ class TblFacturaController extends Controller
         //
         //$datos['factura'] = tbl_factura::get();
         //$datos = tbl_factura::where('id','>',0)->first();
-        $results = tbl_factura::select('SELECT MAX(id) FROM tbl_factura');
+        $results['facturas'] = tbl_factura::orderBy('id', 'desc')->get()->first();
+        
+        //$results['facturas'] = tbl_factura::get();
 
         return (response()->json($results));
         //return view('productos.index',$datos);

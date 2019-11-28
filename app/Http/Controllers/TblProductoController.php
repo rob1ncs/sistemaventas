@@ -106,7 +106,8 @@ class TblProductoController extends Controller
     }
 
     public function get(){
-        $datos['productos'] = tbl_producto::get();
+        
+        $datos['productos'] = tbl_producto::where('estado','=','activo')->get();
         return view('ventas.index',$datos);
     }
 
@@ -120,12 +121,11 @@ class TblProductoController extends Controller
 
     public function estado_desactivado($id)
     {
-        $datosProducto=request()->except(['_token','_method']);
         $estado = tbl_producto::where('id','=',$id)->first();
         $estado->estado = "desactivado";
         $estado->save();
 
-        $producto = tbl_producto::where('estado','=',"activo");
+        //$producto = tbl_producto::where('estado','=',"activo");
         return redirect('productos');
 
 
@@ -133,17 +133,47 @@ class TblProductoController extends Controller
 
     public function estado_activo($id)
     {
-        //$id_factura = App::make('TblFacturasController')->getIndex();
-        $id_factura = (new TblFacturaController)->get_id();
-        //$datosProducto=request()->except(['_token','_method']);
-        //$estado = tbl_producto::where('id','=',$id)->first();
-        //$estado->estado = "activo";
-        //$estado->save();
-        //$id_f = $id_factura->id;
+
+        $estado = tbl_producto::where('id','=',$id)->first();
+        $estado->estado = "activo";
+        $estado->save();
         
-        return (response()->json($id_factura));
-        //return redirect('productos');
-
-
+        //$producto = tbl_producto::where('estado','=',"activo");
+        return redirect('productos');
     }
+
+    public function estado_comprando($id)
+    {
+        //$id_factura = (new TblFacturaController)->get_id();
+
+        $estado = tbl_producto::where('id','=',$id)->first();
+        $estado->campo_compra = "comprando";
+        $estado->save();
+        
+
+        $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+        return view('ventas.create',compact('productos'));
+        //return view('ventas.create',$producto);
+    }
+
+    public function desactivar_compra($id)
+    {
+        //$id_factura = (new TblFacturaController)->get_id();
+
+        $estado = tbl_producto::where('id','=',$id)->first();
+        $estado->campo_compra = "lala";
+        $estado->save();
+        
+
+        $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+        return view('ventas.create',compact('productos'));
+        //return view('ventas.create',$producto);
+    }
+
+    public function ver_carrito(){
+        $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+        return view('ventas.create',compact('productos'));
+    }
+
+
 }

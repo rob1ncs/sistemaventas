@@ -15,7 +15,7 @@
                     <small class="text-muted">
                         <p> ${{ $producto->precio }}</p>
                     </small>
-                    <a href="{{ url('/ver/'.$producto->id) }}" class="btn btn-primary">Ver producto</a>
+                    <a href="{{ url('/comprando/'.$producto->id) }}" class="btn btn-primary">Añadir al carrito</a>
                 </div>
             </div>
             <br><br>
