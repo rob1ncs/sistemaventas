@@ -49,7 +49,7 @@
                                             <li><a href="{{ url('/categorias') }}">Categorias</a></li>
                                         </ul>
                                 </li>
-                                <li><a href="#">Ventas</a></li>
+                                <li><a href="{{ url('/carrito') }}">Carrito de compras</a></li>
                                 <li><a href="#">Page 3</a></li>
                             </ul>
                         </div>

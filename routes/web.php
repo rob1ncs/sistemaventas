@@ -23,11 +23,15 @@ Route::get('/', 'TblProductoController@get');
 Route::get('/desactivar/{id}','TblProductoController@estado_desactivado');
 Route::get('/activar/{id}','TblProductoController@estado_activo');
 Route::get('/ver/{id}','TblProductoController@ver');
+Route::get('/comprando/{id}','TblProductoController@estado_comprando');
+Route::get('/desactivar_compra/{id}','TblProductoController@desactivar_compra');
+Route::get('/carrito','TblProductoController@ver_carrito');
+
 
 Route::resource('productos', 'TblProductoController');
 Route::resource('proveedores', 'TblProveedorController');
 Route::resource('categorias', 'TblCategoriaController');
 Route::resource('clientes', 'TblClienteController');
-Route::resource('facturas', 'TblFacturaController');
+
 
 //Route::get('/home', 'HomeController@index')->name('home');
