@@ -33,5 +33,8 @@ Route::resource('proveedores', 'TblProveedorController');
 Route::resource('categorias', 'TblCategoriaController');
 Route::resource('clientes', 'TblClienteController');
 
+Route::resource('detalle', 'TblDetalleController');
+
+
 
 //Route::get('/home', 'HomeController@index')->name('home');

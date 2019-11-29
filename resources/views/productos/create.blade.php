@@ -8,7 +8,8 @@
     <form action="{{ url('/productos')}}" method="post">
 
         {{ csrf_field() }}
-    
+
+
         <div class="form-group row">
                 <h3>Crear Productos</h3>
             </div>
@@ -82,5 +83,6 @@
             </div>
     </form>
 </div>
+
 
 @endsection

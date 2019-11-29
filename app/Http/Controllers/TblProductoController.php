@@ -40,6 +40,7 @@ class TblProductoController extends Controller
     public function store(Request $request)
     {
         //
+        
         $datosProducto=request()->except('_token');
         
         if($request->hasFile('foto')){
@@ -176,4 +177,14 @@ class TblProductoController extends Controller
     }
 
 
+    public function get_stock()
+    {
+        
+        $proveedores = tbl_producto::get();
+        $proveedorArray[''] = 'Selecciona un proveedor';
+        foreach($proveedores as $prov){
+            $proveedorArray[$prov->id] = $stock->stock;
+        }
+        return $proveedorArray; 
+    }
 }

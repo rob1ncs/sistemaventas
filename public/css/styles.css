@@ -28,7 +28,9 @@ table {
 
 th,
 td {
-    width: 25%;
-    text-align: left;
+
+    width: 10%;
+    text-align: justify;
     vertical-align: top;
+    padding: 15px;
 }

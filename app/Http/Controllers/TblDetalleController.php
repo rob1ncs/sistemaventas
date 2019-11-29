@@ -38,18 +38,22 @@ class TblDetalleController extends Controller
     {
         //
 
+        
         $datosProducto=request()->except('_token');
+        
         //$id_factura = App::make('TblFacturasController')->getIndex();
 
-        $datos['detalle'] = tbl_detalle::get();
-        $id_detalle = $datos->$id_detalle;
+        //$datos['detalle'] = tbl_detalle::get();
+        //$id_detalle = $datos->$id_detalle;
+
         
         //$datos['id']=$request->file('foto')-store('uploads','public');
         
 
-        tbl_producto::insert($datosProducto);
-        //return (response()->json($datosProducto));
-        return redirect('productos');
+        //tbl_producto::insert($datosProducto);
+        return (response()->json($datosProducto));
+        //return redirect('productos');
+
     }
 
     /**
@@ -58,9 +62,15 @@ class TblDetalleController extends Controller
      * @param  \App\tbl_detalle  $tbl_detalle
      * @return \Illuminate\Http\Response
      */
-    public function show(tbl_detalle $tbl_detalle)
+    public function show($id)
     {
         //
+        $categoriaArray['ID'] = $id;
+        // foreach($categorias as $cat){
+        //     $categoriaArray[$cat->id] = $cat->nombre;
+        // }
+        return $categoriaArray; 
+        //return (response()->json($id));
     }
 
     /**
