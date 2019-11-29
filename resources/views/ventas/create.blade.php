@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+
     
         {{ csrf_field() }}
             <div class="row">
@@ -84,6 +85,7 @@
                 
     
     {{-- <a href="{{ url('productos/create') }}">Agregar producto</a> --}}
+
     
     
 </div>

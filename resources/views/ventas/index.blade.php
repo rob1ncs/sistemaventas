@@ -4,6 +4,8 @@
 
 
 
+
+
 <div class="container">
     <div class="row justify-content-center">
         @foreach($productos as $producto)
@@ -15,6 +17,7 @@
                     <p class="card-text" style="width: 100%">{{ $producto->descripcion }}</p>
                 </div>
                 <div class="card-footer">
+
                     <small>
                             <p> ${{ $producto->precio }}</p>
                             <a href="{{ url('/comprando/'.$producto->id) }}" class="btn btn-primary">Añadir al carrito</a>
@@ -32,6 +35,7 @@
                        
                     <br>
                     
+
                 </div>
             </div>
             <br><br>
