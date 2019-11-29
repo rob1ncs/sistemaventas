@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
         {{ csrf_field() }}
-        <form action="{{ url('/proveedores')}}" method="post">
+        <form action="{{ url('/proveedores')}}" method="post" >
             <div class="form-group row">
                 <h3>Crear proveedor</h3>
             </div>
