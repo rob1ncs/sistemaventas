@@ -100,8 +100,9 @@ class TblFacturaController extends Controller
             $id = $res->id+1;
         }
 
-        
-        return $id;
+        $productos = (new TblDetalleController)->actualizar_factura($id);
+
+        return $productos;
         //return view('ventas.create',compact('productos'));
         //return view('productos.index',$datos);
     }

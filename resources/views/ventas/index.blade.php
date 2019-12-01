@@ -21,20 +21,23 @@
                                     {{ csrf_field() }}
                                     <input type="number" name="id" id="id" value="{{ $producto->id }}" style="display: none;">
                                     <input type="number" name="precio" id="precio" value="{{ $producto->precio }}" style="display: none;">
-                                    <small class="text-muted">
-                                        <select name="stock" id="stock">
-                                                @for($i=1;$i<=$producto->stock;$i++)
-                                                    <option value="{{ $i }}">{{ $i }}</option>
-                                                @endfor
-                                        </select>
-                                        Unidades
-                                    </small>
+                                    @if($producto->campo_compra != 'comprando')
+                                        <small class="text-muted">
+                                            <select name="stock" id="stock">
+                                                    @for($i=1;$i<=$producto->stock;$i++)
+                                                        <option value="{{ $i }}">{{ $i }}</option>
+                                                    @endfor
+                                            </select>
+                                            Unidades
+                                        </small>
+                                    @endif
+                                    
                                     <small>
                                             <p> ${{ $producto->precio }}</p>
-                                            @if($producto->estado != 'comprando')
-                                                <input type="submit" class="btn btn-primary" value="Añadir al carrito">
+                                            @if($producto->campo_compra == 'comprando')
+                                                <input type="submit" class="btn btn-danger" value="Producto en carrito" disabled>
                                             @else
-                                                <input type="submit" class="btn btn-primary" value="Añadir al carrito" disabled>
+                                                <input type="submit" class="btn btn-primary" value="Añadir al carrito">
                                             @endif
                                             {{-- <a href="{{ url('/comprando/'.$producto->id) }}" class="btn btn-primary">Añadir al carrito</a> --}}
                                         

@@ -152,11 +152,11 @@ class TblProductoController extends Controller
         $estado->campo_compra = "comprando";
         $estado->save();
         
-        //$productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+        $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
         //return view('ventas.create',compact('productos'));
         //return view('ventas.create',$producto);
         $num = 0;
-        return $num;
+        return $productos;
     }
 
     public function desactivar_compra($id)
@@ -166,7 +166,8 @@ class TblProductoController extends Controller
         $estado = tbl_producto::where('id','=',$id)->first();
         $estado->campo_compra = "lala";
         $estado->save();
-        
+
+        $eliminar_detalle = (new TblDetalleController)->destroy($id);
 
         $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
         return view('ventas.create',compact('productos'));
@@ -174,7 +175,16 @@ class TblProductoController extends Controller
     }
 
     public function ver_carrito(){
-        $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+        //$productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+
+        $productos = tbl_producto::leftJoin('tbl_detalles',function($join){
+            $join->on('tbl_detalles.id_producto','=','tbl_productos.id');
+        })
+        ->select('tbl_productos.id as id','tbl_productos.foto','tbl_productos.nombre','tbl_productos.precio','tbl_detalles.precio as valor','tbl_detalles.cantidad')
+        ->where('tbl_productos.campo_compra','=','comprando')
+        ->whereNull('id_factura')
+        ->get();
+
         return view('ventas.create',compact('productos'));
     }
 
