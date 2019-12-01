@@ -178,6 +178,7 @@ class TblProductoController extends Controller
         return view('ventas.create',compact('productos'));
     }
 
+
     public function get_stock()
     {
         

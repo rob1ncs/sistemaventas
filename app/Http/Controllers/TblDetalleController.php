@@ -47,13 +47,24 @@ class TblDetalleController extends Controller
         $detalle['id_producto'] = $datos['id'];
         $detalle['cantidad'] = $datos['stock'];
         $detalle['precio'] = $datos['precio'] * $datos['stock'];
+
+        
+        $datosProducto=request()->except('_token');
+        
+        //$id_factura = App::make('TblFacturasController')->getIndex();
+
+        //$datos['detalle'] = tbl_detalle::get();
+        //$id_detalle = $datos->$id_detalle;
+
+        
+        //$datos['id']=$request->file('foto')-store('uploads','public');
         
         //tbl_detalle::insert($detalle);
         #Se actualiza estado en el producto
         $estado = (new TblProductoController)->estado_comprando($datos['id']);
 
 
-        $productos = tbl_detalle::where('tbl_detalles.id_producto','tbl_productos.id')
+        $productos = tbl_detalle::where('id_producto','tbl_productos.id')
         ->join('tbl_productos','tbl_detalles.id_productos','=','tbl_productos.id')
         ->select('tbl_productos.foto','tbl_productos.nombre','tbl_detalles.precio','tbl_detalles.cantidad')->get();
 
@@ -71,6 +82,7 @@ class TblDetalleController extends Controller
         //return gettype($datosProducto);
         return (response()->json($productos));
         //return redirect('productos');
+
     }
 
     /**

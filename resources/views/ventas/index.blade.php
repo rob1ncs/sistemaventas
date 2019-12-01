@@ -4,6 +4,8 @@
 
 
 
+
+
 <div class="container">
             <div class="row justify-content-center">
                     @foreach($productos as $producto)
@@ -46,7 +48,5 @@
                     </div>
                     @endforeach
               </div>
-    
-    
 </div>
 @endsection
