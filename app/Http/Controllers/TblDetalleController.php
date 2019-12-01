@@ -56,7 +56,7 @@ class TblDetalleController extends Controller
         $productos = tbl_detalle::where('tbl_detalles.id_producto','tbl_productos.id')
         ->join('tbl_productos','tbl_detalles.id_productos','=','tbl_productos.id')
         ->select('tbl_productos.foto','tbl_productos.nombre','tbl_detalles.precio','tbl_detalles.cantidad')->get();
-        
+
         //$productos = tbl_detalle::where('id_producto','=',"null")->get();
         //$productos = tbl_detalle::select("SELECT d.cantidad, d.precio, p.foto, p.nombre FROM tbl_detalles d, tbl_productos p WHERE d.id_producto = p.id")->get();
         // $productos = tbl_detalle::where('tbl_detalles.id_producto','=','p.id')
