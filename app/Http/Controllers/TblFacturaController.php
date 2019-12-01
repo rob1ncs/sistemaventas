@@ -95,8 +95,14 @@ class TblFacturaController extends Controller
         $results['facturas'] = tbl_factura::orderBy('id', 'desc')->get()->first();
         
         //$results['facturas'] = tbl_factura::get();
+        $id = 0;
+        foreach($results as $res){
+            $id = $res->id+1;
+        }
 
-        return (response()->json($results));
+        
+        return $id;
+        //return view('ventas.create',compact('productos'));
         //return view('productos.index',$datos);
     }
 }

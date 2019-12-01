@@ -13,6 +13,7 @@ class TblProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         
@@ -45,7 +46,7 @@ class TblProductoController extends Controller
         
         if($request->hasFile('foto')){
             
-            $datosProducto['foto']=$request->file('foto')-store('uploads','public');
+            $datosProducto['foto'] = $request->file('foto')-store('uploads','public');
         }
         tbl_producto::insert($datosProducto);
         //return (response()->json($datosProducto));
@@ -151,10 +152,11 @@ class TblProductoController extends Controller
         $estado->campo_compra = "comprando";
         $estado->save();
         
-
-        $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
-        return view('ventas.create',compact('productos'));
+        //$productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+        //return view('ventas.create',compact('productos'));
         //return view('ventas.create',$producto);
+        $num = 0;
+        return $num;
     }
 
     public function desactivar_compra($id)
@@ -184,6 +186,7 @@ class TblProductoController extends Controller
         foreach($proveedores as $prov){
             $proveedorArray[$prov->id] = $stock->stock;
         }
-        return $proveedorArray; 
+        return $proveedorArray;
     }
+
 }

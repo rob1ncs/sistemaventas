@@ -10,7 +10,7 @@
             </div>
             <hr>
             <div class="form-group row">
-                <label for="nombre" class="col-sm-1 col-form-label">{{ 'NOMBRE' }}</label>
+                <label for="nombre" class="col-sm-1 col-form-label">{{ 'Nombre' }}</label>
                 <div class="col-sm-3">
                     <input type="text" name="nombre" class="form-control" id="nombre" required>
                 </div>

@@ -26,7 +26,7 @@ Route::get('/ver/{id}','TblProductoController@ver');
 Route::get('/comprando/{id}','TblProductoController@estado_comprando');
 Route::get('/desactivar_compra/{id}','TblProductoController@desactivar_compra');
 Route::get('/carrito','TblProductoController@ver_carrito');
-
+Route::get('/generar_boleta','TblFacturaController@get_id');
 
 Route::resource('productos', 'TblProductoController');
 Route::resource('proveedores', 'TblProveedorController');
