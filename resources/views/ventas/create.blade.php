@@ -61,39 +61,42 @@
 
 
     {{-- MODAL --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">Compra</h5> -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ url('/generar_boleta') }}">
+                <form action="{{ url('/clientes') }}" method="post">
+                {{ csrf_field() }}
                     <div class="modal-body">
-                        
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">RUT</label>
-                                <input type="text" class="form-control" id="recipient-name" required>
+                                <label for="rut" class="col-form-label">RUT</label>
+                                <input type="text" class="form-control" name="rut" id="rut" required>
                             </div>
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">NOMBRE</label>
-                                <input type="text" class="form-control" id="recipient-name" required>
+                                <label for="nombre" class="col-form-label">NOMBRE</label>
+                                <input type="text" class="form-control" name="nombre" id="nombre" required>
                             </div>
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">TELEFONO</label>
-                                <input type="text" class="form-control" id="recipient-name" required>
+                                <label for="apellido" class="col-form-label">APELLIDO</label>
+                                <input type="text" class="form-control" name="apellido" id="apellido" required>
                             </div>
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">EMAIL</label>
-                                <input type="text" class="form-control" id="recipient-name" required>
+                                <label for="pago" class="col-form-label">MEDIO DE PAGO</label>
+                                <select name="pago" id="pago" class="form-control">
+                                    <option value="efectivo" selected>Efectivo</option>
+                                    <option value="debito">Debito</option>
+                                    <option value="credito">Credito</option>
+                                </select>
                             </div>
-                        
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Comprar</button>
+                        <button type="submit" class="btn btn-success">Comprar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div>

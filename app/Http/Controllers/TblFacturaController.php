@@ -37,9 +37,11 @@ class TblFacturaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($factura)
     {
         //
+        tbl_factura::insert($factura);
+        
     }
 
     /**
@@ -95,15 +97,26 @@ class TblFacturaController extends Controller
         $results['facturas'] = tbl_factura::orderBy('id', 'desc')->get()->first();
         
         //$results['facturas'] = tbl_factura::get();
+
         $id = 0;
-        foreach($results as $res){
-            $id = $res->id+1;
+
+        if(is_null($results['facturas'])){
+            $id=1;
+        }else{
+            foreach($results as $res){
+                $id = $res->id;
+            }
         }
 
-        $productos = (new TblDetalleController)->actualizar_factura($id);
+        //$productos = (new TblDetalleController)->actualizar_factura($id);
 
-        return $productos;
+        return $id;
         //return view('ventas.create',compact('productos'));
         //return view('productos.index',$datos);
     }
+
+    
+
+
+
 }

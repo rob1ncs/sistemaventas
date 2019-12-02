@@ -3,9 +3,6 @@
 @section('content')
 
 
-
-
-
 <div class="container">
             <div class="row justify-content-center">
                     @foreach($productos as $producto)
@@ -39,7 +36,6 @@
                                             @else
                                                 <input type="submit" class="btn btn-primary" value="Añadir al carrito">
                                             @endif
-                                            {{-- <a href="{{ url('/comprando/'.$producto->id) }}" class="btn btn-primary">Añadir al carrito</a> --}}
                                         
                                     </small>
                                 </form>
@@ -50,6 +46,6 @@
                         <br><br>
                     </div>
                     @endforeach
-              </div>
+            </div>
 </div>
 @endsection

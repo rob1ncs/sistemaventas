@@ -83,6 +83,8 @@ class TblProductoController extends Controller
      * @param  \App\tbl_producto  $tbl_producto
      * @return \Illuminate\Http\Response
      */
+
+
     public function update(Request $request, $id)
     {
         $datosProducto=request()->except(['_token','_method']);
@@ -112,6 +114,7 @@ class TblProductoController extends Controller
         $datos['productos'] = tbl_producto::where('estado','=','activo')->get();
         return view('ventas.index',$datos);
     }
+
 
     public function ver($id)
     {
@@ -169,7 +172,13 @@ class TblProductoController extends Controller
 
         $eliminar_detalle = (new TblDetalleController)->destroy($id);
 
-        $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+        $productos = tbl_producto::leftJoin('tbl_detalles',function($join){
+            $join->on('tbl_detalles.id_producto','=','tbl_productos.id');
+        })
+        ->select('tbl_productos.id as id','tbl_productos.foto','tbl_productos.nombre','tbl_productos.precio','tbl_detalles.precio as valor','tbl_detalles.cantidad')
+        ->where('tbl_productos.campo_compra','=','comprando')
+        ->whereNull('id_factura')
+        ->get();
         return view('ventas.create',compact('productos'));
         //return view('ventas.create',$producto);
     }
@@ -198,6 +207,20 @@ class TblProductoController extends Controller
             $proveedorArray[$prov->id] = $stock->stock;
         }
         return $proveedorArray;
+    }
+
+
+    public function compra(){
+
+        $estado = tbl_producto::where('campo_compra','=','comprando')
+        ->update(['campo_compra' => 'lala']);
+        
+    }
+
+
+    public function terminar_compra(){
+        $datos['productos'] = tbl_producto::where('estado','=','activo')->get();
+        return $datos;
     }
 
 }
