@@ -1,10 +1,8 @@
 @extends('layouts.app')
-@include('layouts.app')
+
 
 @section('content')
 <div class="container">
-        
-
         <form action="{{ url('/proveedores')}}" method="post" >
         {{ csrf_field() }}
             <div class="form-group row">

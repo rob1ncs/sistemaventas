@@ -42,8 +42,6 @@ class TblDetalleController extends Controller
 
         $id_factura = (new TblFacturaController)->get_id();
 
-        //$detalle['id_detalle'] = $id_factura;
-        //$detalle['id_factura'] = '';
         $detalle['id_producto'] = $datos['id'];
         $detalle['cantidad'] = $datos['stock'];
         $detalle['precio'] = $datos['precio'] * $datos['stock'];

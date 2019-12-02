@@ -5,25 +5,47 @@
         <form action="{{ url('/productos/'.$producto->id)}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}
-            
-                <label for="nombre">{{ 'nombre' }}</label>
-                <input type="text" name="nombre" id="nombre" value="{{ $producto->nombre }}">
-                <br>
-            
-                <label for="descripcion">{{ 'descripcion' }}</label>
-                <input type="text" name="descripcion" id="descripcion" value="{{ $producto->descripcion }}">
-                <br>
-            
-                <label for="precio">{{ 'precio' }}</label>
-                <input type="number" name="precio" id="precio" value="{{ $producto->precio }}">
-                <br>
-            
-                <label for="stock">{{ 'stock' }}</label>
-                <input type="number" name="stock" id="stock" value="{{ $producto->stock }}">
-                <br>
-                
-                <input class="btn btn-primary" type="submit" value="Editar">
-                <a class="btn btn-secondary" href="{{ url('productos') }}">Regresar</a>
+                <div class="form-group row">
+                    <h3>Editar Producto</h3>
+                </div>
+                <hr>
+                <div class="form-group row">
+                    <label for="nombre" class="col-sm-1 col-form-label">{{ 'Nombre' }}</label>
+                    <div class="col-sm-3">
+                        <input type="text" name="nombre" class="form-control" id="nombre" value="{{ $producto->nombre }}" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="descripcion" class="col-sm-1 col-form-label">{{ 'Descripcion' }}</label>
+                    <div class="col-sm-3">
+                        <input type="textarea" name="descripcion" class="form-control" id="descripcion" value="{{ $producto->descripcion }}" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="precio" class="col-sm-1 col-form-label">{{ 'Precio' }}</label>
+                    <div class="col-sm-3">
+                        <input type="number" name="precio" class="form-control" id="precio" value="{{ $producto->precio }}" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="stock" class="col-sm-1 col-form-label">{{ 'Stock' }}</label>
+                    <div class="col-sm-3">
+                        <input type="number" name="stock" class="form-control" id="stock" value="{{ $producto->stock }}" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <hr>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <input type="submit" value="Actualizar" class="btn btn-success">
+                    </div>
+                    <div class="col-sm-3">
+                        <a class="btn btn-danger" href="{{ url('productos') }}">Regresar</a>
+                    </div>
+                </div>
             </form>
 </div>
 

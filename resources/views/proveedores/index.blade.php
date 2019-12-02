@@ -23,17 +23,19 @@
                 <td>{{ $producto->direccion }}</td>
                 <td>{{ $producto->telefono }}</td>
                 <td>
-                    <a href="{{ url('/proveedores/'.$producto->id.'/edit') }}">
+                    <a href="{{ url('/proveedores/'.$producto->id.'/edit') }}" class="btn btn-primary">
                         editar
                     </a>
-                    | 
-
-                    <form method="post" action="{{ url('/proveedores/'.$producto->id) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <button type="submit" onclick="return confirm('¿ Está seguro ?')">Borrar</button>
-                    </form>
                 </td>
+                <td>
+                <form method="post" action="{{ url('/proveedores/'.$producto->id) }}">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('¿ Está seguro ?')">Borrar</button>
+                </form>
+                </td>
+                    
+                
             </tr>
         @endforeach
         </tbody>

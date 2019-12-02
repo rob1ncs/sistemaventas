@@ -118,7 +118,6 @@ class TblProductoController extends Controller
 
     public function ver($id)
     {
-        //
         $producto = tbl_producto::findOrFail($id);
         return (response()->json($producto));
         //return redirect('ventas.verproducto');
