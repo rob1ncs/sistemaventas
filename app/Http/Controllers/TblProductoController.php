@@ -150,23 +150,30 @@ class TblProductoController extends Controller
     {
         //$id_factura = (new TblFacturaController)->get_id();
 
+        $cantidad = (new TblDetalleController)->obtener_stock($id);
         $estado = tbl_producto::where('id','=',$id)->first();
+
         $estado->campo_compra = "comprando";
+        $estado->stock = $estado->stock - $cantidad['cantidad'];
         $estado->save();
+
+        
         
         $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
         //return view('ventas.create',compact('productos'));
         //return view('ventas.create',$producto);
-        $num = 0;
+        
         return $productos;
     }
 
     public function desactivar_compra($id)
     {
         //$id_factura = (new TblFacturaController)->get_id();
-
+        $cantidad = (new TblDetalleController)->obtener_stock($id);
         $estado = tbl_producto::where('id','=',$id)->first();
+
         $estado->campo_compra = "lala";
+        $estado->stock = $estado->stock + $cantidad['cantidad'];
         $estado->save();
 
         $eliminar_detalle = (new TblDetalleController)->destroy($id);
@@ -220,6 +227,15 @@ class TblProductoController extends Controller
     public function terminar_compra(){
         $datos['productos'] = tbl_producto::where('estado','=','activo')->get();
         return $datos;
+    }
+
+    public function actualiza_stock($id,$stock){
+
+        $estado = tbl_producto::where('id','=',$id)->first();
+
+        $nuevo_stock = $estado->stock - $stock;
+        $estado->stock = $nuevo_stock;
+        $estado->save();
     }
 
 }

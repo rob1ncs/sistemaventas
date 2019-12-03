@@ -4,7 +4,6 @@
 
 
 <div class="container">
-        <div class="shadow-sm p-4 mb-4 bg-light">Larger shadow</div>
             <div class="row justify-content-justify">
                     @foreach($productos as $producto)
                     <div class="col-md-3">

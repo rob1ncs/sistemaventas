@@ -18,7 +18,7 @@
                 <div class="form-group row">
                     <label for="descripcion" class="col-sm-1 col-form-label">{{ 'Descripcion' }}</label>
                     <div class="col-sm-3">
-                        <input type="textarea" name="descripcion" class="form-control" id="descripcion" value="{{ $producto->descripcion }}" required>
+                        <textarea name="descripcion" class="form-control" id="descripcion" required>{{ $producto->descripcion }}</textarea>
                     </div>
                 </div>
                 <div class="form-group row">

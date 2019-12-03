@@ -177,8 +177,17 @@ class TblDetalleController extends Controller
         $estado = tbl_detalle::whereNull('id_factura')
         ->update(['id_factura' => $id_factura]);
             
-        
-    
+    }
+
+
+    public function obtener_stock($id){
+
+        $cantidad = tbl_detalle::whereNull('id_factura')
+        ->where('id_producto','=',$id)
+        ->select('cantidad')
+        ->first();
+
+        return $cantidad;
     }
 
     
