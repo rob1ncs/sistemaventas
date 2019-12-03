@@ -4,16 +4,17 @@
 
 
 <div class="container">
-            <div class="row justify-content-center">
+        <div class="shadow-sm p-4 mb-4 bg-light">Larger shadow</div>
+            <div class="row justify-content-justify">
                     @foreach($productos as $producto)
                     <div class="col-md-3">
                         <div class="card text-white mb-3">
-                            <img class="card-img-top" src="{{ URL::asset('storage/uploads').'/'.$producto->foto }}" alt="" style="width:50%">
-                            <div class="card-body">
+                            <img class="card-img-top" src="{{ URL::asset('storage/uploads').'/'.$producto->foto }}" alt="" style="width:75%;">
+                            <div class="card-body text-justify">
                                 <h4 class="card-title">{{ $producto->nombre }}</h4>
                                 <p class="card-text" style="width: 100%">{{ $producto->descripcion }}</p>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-justify">
                                 <form action="{{ url('/detalle')}}" method="post">
                                     {{ csrf_field() }}
                                     <input type="number" name="id" id="id" value="{{ $producto->id }}" style="display: none;">
@@ -30,7 +31,7 @@
                                     @endif
                                     
                                     <small>
-                                            <p> ${{ $producto->precio }}</p>
+                                            <h4>${{ $producto->precio }}</h4>
                                             @if($producto->campo_compra == 'comprando')
                                                 <input type="submit" class="btn btn-danger" value="Producto en carrito" disabled>
                                             @else

@@ -2,15 +2,17 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ url('categorias/create') }}">Agregar categoria</a>
+    <a class="btn btn-primary" href="{{ url('categorias/create') }}">Agregar categoria</a>
+
     <hr>
     <table class="table table-light">
         <thead class="thead-light">
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>descripcion</th>
-                
+            <tr class="bg-primary">
+                <th>ITEM</th>
+                <th>NOMBRE</th>
+                <th>DESCRIPCION</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
 
@@ -21,15 +23,15 @@
                 <td>{{ $categoria->nombre }}</td>
                 <td>{{ $categoria->descripcion }}</td>
                 <td>
-                    <a href="{{ url('/categorias/'.$categoria->id.'/edit') }}">
+                    <a class="btn btn-primary" href="{{ url('/categorias/'.$categoria->id.'/edit') }}">
                         editar
                     </a>
-                    | 
-
+                </td>
+                <td>
                     <form method="post" action="{{ url('/categorias/'.$categoria->id) }}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        <button type="submit" onclick="return confirm('¿ Está seguro ?')">Borrar</button>
+                        <button class="btn btn-danger" type="submit" onclick="return confirm('¿ Está seguro ?')">Borrar</button>
                     </form>
                 </td>
             </tr>

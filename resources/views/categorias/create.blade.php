@@ -33,7 +33,6 @@
                         <a class="btn btn-danger" href="{{ url('categorias') }}">Regresar</a>
                     </div>
                 </div>
-
         </form>
 </div>
 @endsection
