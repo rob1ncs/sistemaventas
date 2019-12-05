@@ -17,6 +17,7 @@ class TblDetalleController extends Controller
     {
         //
         
+        
     }
 
     /**
@@ -188,6 +189,14 @@ class TblDetalleController extends Controller
         ->first();
 
         return $cantidad;
+    }
+
+    public function obtener_detalle($id){
+        
+        $detalle = tbl_detalle::where('id_factura','=',$id)->get();
+
+        return (response()->json($detalle));
+        //return view('ventas.ver_venta',compact('detalle'));
     }
 
     

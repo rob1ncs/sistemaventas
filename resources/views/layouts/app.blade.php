@@ -47,7 +47,7 @@
                                     </ul>
                             </li>
                             <li><a href="{{ url('/carrito') }}">Carrito de compras</a></li>
-                            <li><a href="#">Page 3</a></li>
+                            <li><a href="{{ url('/factura') }}">Ver ventas</a></li>
                         </ul>
                     </div>
                 </div>

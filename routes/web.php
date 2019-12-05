@@ -28,12 +28,14 @@ Route::get('/desactivar_compra/{id}','TblProductoController@desactivar_compra');
 Route::get('/carrito','TblProductoController@ver_carrito');
 Route::get('/generar_boleta','TblFacturaController@get_id');
 Route::get('/valida_cliente','TblClienteController@valida_cliente');
+Route::get('/obtener_detalle/{id}','TblDetalleController@obtener_detalle');
 
 Route::resource('productos', 'TblProductoController');
 Route::resource('proveedores', 'TblProveedorController');
 Route::resource('categorias', 'TblCategoriaController');
 Route::resource('clientes', 'TblClienteController');
 Route::resource('detalle', 'TblDetalleController');
+Route::resource('factura', 'TblFacturaController');
 
 
 
