@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <a class="btn btn-primary" href="{{ url('categorias/create') }}">Agregar categoria</a>
+    <a class="btn btn-success" href="{{ url('categorias/create') }}">Agregar categoria</a>
 
     <hr>
     <table class="table table-light">

@@ -193,10 +193,25 @@ class TblDetalleController extends Controller
 
     public function obtener_detalle($id){
         
-        $detalle = tbl_detalle::where('id_factura','=',$id)->get();
+        $detalles = tbl_detalle::select('tbl_productos.foto as foto',
+                                        'tbl_productos.nombre as nombre',
+                                        'tbl_productos.descripcion as descripcion',
+                                        'tbl_detalles.cantidad as cantidad',
+                                        'tbl_detalles.precio as precio',
+                                        'tbl_detalles.id as total')
+        ->join('tbl_productos','tbl_productos.id','=','tbl_detalles.id_producto')
+        ->where('tbl_detalles.id_factura','=',$id)->get();
 
-        return (response()->json($detalle));
-        //return view('ventas.ver_venta',compact('detalle'));
+        $total = tbl_detalle::where('id_factura','=',$id)->sum('precio');
+
+        // for($i=0;$i<count($detalles);$i++){
+        //     $detalles[$i]->total = $total;
+        // }
+        //$detalles['total'] = $total;
+
+        //return $detalles;
+        //return (response()->json($detalles));
+        return view('ventas.ver_venta')->with('detalles',$detalles)->with('total',$total);
     }
 
     

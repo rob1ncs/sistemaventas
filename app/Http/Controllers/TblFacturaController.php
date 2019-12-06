@@ -15,12 +15,12 @@ class TblFacturaController extends Controller
     public function index()
     {
         
-        $productos['productos'] = tbl_factura::select('tbl_facturas.id as id','tbl_clientes.rut as rut','tbl_clientes.nombre as nombre','tbl_clientes.apellido as apellido','tbl_facturas.fecha as fecha','tbl_facturas.total as total','tbl_facturas.medio_pago as medio_pago')
+        $facturas['facturas'] = tbl_factura::select('tbl_facturas.id as id','tbl_clientes.rut as rut','tbl_clientes.nombre as nombre','tbl_clientes.apellido as apellido','tbl_facturas.fecha as fecha','tbl_facturas.total as total','tbl_facturas.medio_pago as medio_pago')
         ->join('tbl_clientes', 'tbl_clientes.id', '=', 'tbl_facturas.id_cliente')
         ->get();
 
         //return (response()->json($productos));
-        return view('ventas.cartola_detalle',$productos);
+        return view('ventas.cartola_detalle',$facturas);
     }
 
     /**
