@@ -12,7 +12,7 @@
 
         <div class="form-group row">
                 <h3>Crear Productos</h3>
-            </div>
+        </div>
             <hr>
             <div class="form-group row">
                 <label for="nombre" class="col-sm-1 col-form-label">{{ 'Nombre' }}</label>

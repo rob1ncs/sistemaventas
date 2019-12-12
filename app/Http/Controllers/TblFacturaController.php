@@ -14,11 +14,13 @@ class TblFacturaController extends Controller
      */
     public function index()
     {
-        //
-        $datos = tbl_factura::get();
         
-        return (response()->json($datos));
-        //return view('productos.index',$datos);
+        $facturas['facturas'] = tbl_factura::select('tbl_facturas.id as id','tbl_clientes.rut as rut','tbl_clientes.nombre as nombre','tbl_clientes.apellido as apellido','tbl_facturas.fecha as fecha','tbl_facturas.total as total','tbl_facturas.medio_pago as medio_pago')
+        ->join('tbl_clientes', 'tbl_clientes.id', '=', 'tbl_facturas.id_cliente')
+        ->get();
+
+        //return (response()->json($productos));
+        return view('ventas.cartola_detalle',$facturas);
     }
 
     /**
@@ -37,9 +39,11 @@ class TblFacturaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($factura)
     {
         //
+        tbl_factura::insert($factura);
+        
     }
 
     /**
@@ -96,7 +100,29 @@ class TblFacturaController extends Controller
         
         //$results['facturas'] = tbl_factura::get();
 
-        return (response()->json($results));
+        $id = 0;
+
+        if(is_null($results['facturas'])){
+            $id=1;
+        }else{
+            foreach($results as $res){
+                $id = $res->id;
+            }
+        }
+
+        //$productos = (new TblDetalleController)->actualizar_factura($id);
+
+        return $id;
+        //return view('ventas.create',compact('productos'));
         //return view('productos.index',$datos);
     }
+
+    
+
+
+
+    
+
+
+
 }

@@ -2,36 +2,37 @@
 
 @section('content')
 <div class="container">
-        
-        <a href="{{ url('proveedores/create') }}">Agregar Proveedor</a>
+    <a class="btn btn-success" href="{{ url('proveedores/create') }}">Agregar Proveedor</a>
     <hr>
     <table class="table table-light">
-        <thead class="thead-light">
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Direccion</th>
-                <th>telefono</th>
+        <thead>
+            <tr  class="bg-primary">
+                <th>ITEM</th>
+                <th>NOMBRE</th>
+                <th>DIRECCION</th>
+                <th>TELEFONO</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
 
         <tbody>
-        @foreach($proveedores as $producto)
+        @foreach($proveedores as $proveedor)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $producto->nombre }}</td>
-                <td>{{ $producto->direccion }}</td>
-                <td>{{ $producto->telefono }}</td>
+                <td>{{ $proveedor->nombre }}</td>
+                <td>{{ $proveedor->direccion }}</td>
+                <td>{{ $proveedor->telefono }}</td>
                 <td>
-                    <a href="{{ url('/proveedores/'.$producto->id.'/edit') }}">
+                    <a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-primary">
                         editar
                     </a>
-                    | 
-
-                    <form method="post" action="{{ url('/proveedores/'.$producto->id) }}">
+                </td>
+                <td>
+                    <form method="post" action="{{ url('/proveedores/'.$proveedor->id) }}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        <button type="submit" onclick="return confirm('¿ Está seguro ?')">Borrar</button>
+                        <button class="btn btn-danger" type="submit" onclick="return confirm('¿ Está seguro ?')">Borrar</button>
                     </form>
                 </td>
             </tr>
@@ -39,4 +40,50 @@
         </tbody>
     </table>
 </div>
+
+{{-- MODAL --}}
+<div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                
+                        <form action="{{ url('/proveedores')}}" method="post">
+                            {{ csrf_field() }}
+                            
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <label for="nombre" class="col-sm-1 col-form-label">{{ 'Nombre' }}</label>
+                                                    <input type="text" name="nombre" class="form-control" id="nombre" required>
+                                                </div>
+                                                    
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                        <label for="direccion" class="col-sm-1 col-form-label">{{ 'Direccion' }}</label>
+                                                
+                                                        <input type="text" name="direccion" class="form-control" id="direccion" required>
+                                                        
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="telefono" class="col-sm-1 col-form-label">{{ 'Telefono' }}</label>
+                                            
+                                                    <input type="number" name="telefono" class="form-control" id="telefono" required>
+                                                    
+                                            </div>
+                                                
+                                            </div>
+                                                  
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success">Registrar</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
 @endsection

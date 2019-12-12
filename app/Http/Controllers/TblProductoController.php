@@ -13,6 +13,7 @@ class TblProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         
@@ -45,7 +46,7 @@ class TblProductoController extends Controller
         
         if($request->hasFile('foto')){
             
-            $datosProducto['foto']=$request->file('foto')-store('uploads','public');
+            $datosProducto['foto'] = $request->file('foto')-store('uploads','public');
         }
         tbl_producto::insert($datosProducto);
         //return (response()->json($datosProducto));
@@ -82,6 +83,8 @@ class TblProductoController extends Controller
      * @param  \App\tbl_producto  $tbl_producto
      * @return \Illuminate\Http\Response
      */
+
+
     public function update(Request $request, $id)
     {
         $datosProducto=request()->except(['_token','_method']);
@@ -112,9 +115,9 @@ class TblProductoController extends Controller
         return view('ventas.index',$datos);
     }
 
+
     public function ver($id)
     {
-        //
         $producto = tbl_producto::findOrFail($id);
         return (response()->json($producto));
         //return redirect('ventas.verproducto');
@@ -147,32 +150,56 @@ class TblProductoController extends Controller
     {
         //$id_factura = (new TblFacturaController)->get_id();
 
+        $cantidad = (new TblDetalleController)->obtener_stock($id);
         $estado = tbl_producto::where('id','=',$id)->first();
-        $estado->campo_compra = "comprando";
-        $estado->save();
-        
 
+        $estado->campo_compra = "comprando";
+        $estado->stock = $estado->stock - $cantidad['cantidad'];
+        $estado->save();
+
+        
+        
         $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
-        return view('ventas.create',compact('productos'));
+        //return view('ventas.create',compact('productos'));
         //return view('ventas.create',$producto);
+        
+        return $productos;
     }
 
     public function desactivar_compra($id)
     {
         //$id_factura = (new TblFacturaController)->get_id();
-
+        $cantidad = (new TblDetalleController)->obtener_stock($id);
         $estado = tbl_producto::where('id','=',$id)->first();
-        $estado->campo_compra = "lala";
-        $estado->save();
-        
 
-        $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+        $estado->campo_compra = "lala";
+        $estado->stock = $estado->stock + $cantidad['cantidad'];
+        $estado->save();
+
+        $eliminar_detalle = (new TblDetalleController)->destroy($id);
+
+        $productos = tbl_producto::leftJoin('tbl_detalles',function($join){
+            $join->on('tbl_detalles.id_producto','=','tbl_productos.id');
+        })
+        ->select('tbl_productos.id as id','tbl_productos.foto','tbl_productos.nombre','tbl_productos.precio','tbl_detalles.precio as valor','tbl_detalles.cantidad')
+        ->where('tbl_productos.campo_compra','=','comprando')
+        ->whereNull('id_factura')
+        ->get();
         return view('ventas.create',compact('productos'));
         //return view('ventas.create',$producto);
     }
 
     public function ver_carrito(){
-        $productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+        //$productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+
+        $productos = tbl_producto::leftJoin('tbl_detalles',function($join){
+            $join->on('tbl_detalles.id_producto','=','tbl_productos.id');
+        })
+        ->select('tbl_productos.id as id','tbl_productos.foto','tbl_productos.nombre','tbl_productos.precio','tbl_detalles.precio as valor','tbl_detalles.cantidad')
+        ->where('tbl_productos.campo_compra','=','comprando')
+        ->whereNull('id_factura')
+        ->get();
+
         return view('ventas.create',compact('productos'));
     }
 
@@ -185,6 +212,36 @@ class TblProductoController extends Controller
         foreach($proveedores as $prov){
             $proveedorArray[$prov->id] = $stock->stock;
         }
-        return $proveedorArray; 
+
+        return $proveedorArray;
+    }
+
+
+    public function compra(){
+
+        $estado = tbl_producto::where('campo_compra','=','comprando')
+        ->update(['campo_compra' => 'lala']);
+        
+    }
+
+
+    public function terminar_compra(){
+        $datos['productos'] = tbl_producto::where('estado','=','activo')->get();
+        return $datos;
+    }
+
+    public function actualiza_stock($id,$stock){
+
+        $estado = tbl_producto::where('id','=',$id)->first();
+
+        $nuevo_stock = $estado->stock - $stock;
+        $estado->stock = $nuevo_stock;
+        $estado->save();
+    }
+
+    public function producto_categoria($id){
+        $datos['productos'] = tbl_producto::where('id_categoria','=',$id)->get();
+        return view('ventas.index',$datos);
+
     }
 }

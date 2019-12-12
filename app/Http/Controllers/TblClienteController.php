@@ -38,10 +38,35 @@ class TblClienteController extends Controller
     public function store(Request $request)
     {
         //
-        $datosProveedor=request()->except('_token');
+        $datos = request()->except('_token');
 
-        tbl_cliente::insert($datosProveedor);
-        return response()->json($datosProveedor);
+        $cliente = self::valida_cliente($datos['rut']);
+        $hoy = date('Y-m-d H:i:s');
+
+        if(!$cliente){
+            $registrar['rut'] = $datos['rut'];
+            $registrar['nombre'] = $datos['nombre'];
+            $registrar['apellido'] = $datos['apellido'];
+
+            tbl_cliente::insert($registrar);
+        }
+
+        $monto = (new TblDetalleController)->obtener_monto();
+        $id_cliente = tbl_cliente::where('rut','=',$datos['rut'])->select('id')->first();
+
+        $factura['id_cliente'] = $id_cliente->id;
+        $factura['fecha'] = $hoy;
+        $factura['total'] = $monto;
+        $factura['medio_pago'] = $datos['pago'];
+
+        $registra_factura = (new TblFacturaController)->store($factura);
+        $ac_compra = (new TblProductoController)->compra();
+        $ac_factura = (new TblDetalleController)->actualiza_detalle();
+        $productos = (new TblProductoController)->terminar_compra();
+
+        return view('ventas.index',$productos);
+        //return $hoy;
+        //return response()->json($cliente);
     }
 
     /**
@@ -73,6 +98,7 @@ class TblClienteController extends Controller
      * @param  \App\tbl_cliente  $tbl_cliente
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, tbl_cliente $tbl_cliente)
     {
         //
@@ -87,5 +113,17 @@ class TblClienteController extends Controller
     public function destroy(tbl_cliente $tbl_cliente)
     {
         //
+    }
+
+    public static function valida_cliente($rut){
+
+        $cliente = tbl_cliente::where('rut','=',$rut)->get();
+
+        if(count($cliente)==0){
+            return false;
+        }else{
+            return true;
+        }
+        //return $cliente;
     }
 }

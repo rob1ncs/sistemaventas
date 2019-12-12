@@ -4,10 +4,6 @@
 
 /* Not required for template or sticky footer method. */
 
-.navbar {
-    margin-bottom: 20px;
-}
-
 
 /* * {
     box-sizing: border-box;
@@ -18,10 +14,6 @@
 
  */
 
-.container {
-    margin-top: 80px;
-}
-
 table {
     width: 100%;
 }
@@ -29,8 +21,20 @@ table {
 th,
 td {
 
+
     width: 10%;
     text-align: justify;
     vertical-align: top;
     padding: 15px;
+
+}
+
+textarea {
+    resize: vertical;
+}
+
+#app {
+    padding: 80px;
+    background-color: whitesmoke;
+
 }

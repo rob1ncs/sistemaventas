@@ -1,18 +1,18 @@
 @extends('layouts.app')
-@include('layouts.app')
+
 
 @section('content')
 <div class="container">
+        <form action="{{ url('/proveedores')}}" method="post" >
         {{ csrf_field() }}
 
-        <form action="{{ url('/proveedores')}}" method="post" >
 
             <div class="form-group row">
                 <h3>Crear proveedor</h3>
             </div>
             <hr>
             <div class="form-group row">
-                <label for="nombre" class="col-sm-1 col-form-label">{{ 'NOMBRE' }}</label>
+                <label for="nombre" class="col-sm-1 col-form-label">{{ 'Nombre' }}</label>
                 <div class="col-sm-3">
                     <input type="text" name="nombre" class="form-control" id="nombre" required>
                 </div>

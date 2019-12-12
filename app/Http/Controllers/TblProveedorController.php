@@ -15,7 +15,8 @@ class TblProveedorController extends Controller
     public function index()
     {
         //
-        $datos['proveedores'] = tbl_proveedor::paginate(5);
+        $datos['proveedores'] = tbl_proveedor::get();
+        //return response()->json($datos);
         return view('proveedores.index',$datos);
     }
 

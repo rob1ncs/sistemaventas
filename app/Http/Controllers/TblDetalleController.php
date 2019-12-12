@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\tbl_detalle;
 use Illuminate\Http\Request;
+use DB;
 
 class TblDetalleController extends Controller
 {
@@ -15,6 +16,7 @@ class TblDetalleController extends Controller
     public function index()
     {
         //
+        
         
     }
 
@@ -34,25 +36,59 @@ class TblDetalleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request)
     {
         //
+        $datos = request()->except('_token');
+
+        $id_factura = (new TblFacturaController)->get_id();
+
+
+        $detalle['id_producto'] = $datos['id'];
+        $detalle['cantidad'] = $datos['stock'];
+        $detalle['precio'] = $datos['precio'] * $datos['stock'];
+
 
         
-        $datosProducto=request()->except('_token');
+        //$datosProducto=request()->except('_token');
         
-        //$id_factura = App::make('TblFacturasController')->getIndex();
-
         //$datos['detalle'] = tbl_detalle::get();
         //$id_detalle = $datos->$id_detalle;
 
-        
-        //$datos['id']=$request->file('foto')-store('uploads','public');
+        $id_producto = tbl_detalle::whereNull('id_factura')
+        ->where('id_producto','=',$datos['id'])
+        ->select('id_producto')
+        ->groupBy('id_producto')->get();
+
+        if(count($id_producto) == 0){
+            tbl_detalle::insert($detalle);
+        }
+
+        #Se actualiza estado en el producto
+        $res_producto = (new TblProductoController)->estado_comprando($datos['id']);
+        //$res_detalle = tbl_detalle::whereNull('id_factura')->select('id_producto','cantidad','precio')->get();
+
+        // $productos = tbl_detalle::whereNull('id_factura')
+        // ->join('tbl_productos, tbl_detalles','id','=','id_producto')
+        // ->select('foto','nombre','cantidad','precio')->get();
         
 
-        //tbl_producto::insert($datosProducto);
-        return (response()->json($datosProducto));
+        $productos = tbl_detalle::leftJoin('tbl_productos',function($join){
+            $join->on('tbl_detalles.id_producto','=','tbl_productos.id');
+        })
+        ->select('tbl_productos.id as id','tbl_productos.foto','tbl_productos.nombre','tbl_productos.precio','tbl_detalles.precio as valor','tbl_detalles.cantidad')
+        ->where('tbl_productos.campo_compra','=','comprando')
+        ->whereNull('id_factura')
+        ->get();
+        
+
+        return view('ventas.create',compact('productos'));
+        //return $id_factura;
+        //return gettype($datosProducto);
+        //return $productos;
         //return redirect('productos');
+
+
 
     }
 
@@ -102,9 +138,84 @@ class TblDetalleController extends Controller
      * @param  \App\tbl_detalle  $tbl_detalle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tbl_detalle $tbl_detalle)
+    public function destroy($id)
     {
-        //
+        tbl_detalle::where('id_producto','=',$id)->delete();
+
+        $productos = tbl_detalle::leftJoin('tbl_productos',function($join){
+            $join->on('tbl_detalles.id_producto','=','tbl_productos.id');
+        })
+        ->select('tbl_productos.id as id','tbl_productos.foto','tbl_productos.nombre','tbl_productos.precio','tbl_detalles.precio as valor','tbl_detalles.cantidad')
+        ->where('tbl_productos.campo_compra','=','comprando')
+        ->whereNull('id_factura')
+        ->get();
+
+        return view('ventas.create',compact('productos'));
+    }
+
+
+
+    public function actualizar_factura($id)
+    {
+        $estado = tbl_detalle::whereNull('id_factura')
+        ->update(['id_factura' => $id-1]);
+
+        $productos = tbl_detalle::where('id_factura','=',$id);
+
+        return $productos;
+
+    }
+
+    public function obtener_monto(){
+
+        $monto = tbl_detalle::whereNull('id_factura')
+        ->sum('precio');
+
+        return $monto;
+    }
+
+
+    public function actualiza_detalle(){
+
+        $id_factura = (new TblFacturaController)->get_id();
+
+        $estado = tbl_detalle::whereNull('id_factura')
+        ->update(['id_factura' => $id_factura]);
+            
+    }
+
+
+    public function obtener_stock($id){
+
+        $cantidad = tbl_detalle::whereNull('id_factura')
+        ->where('id_producto','=',$id)
+        ->select('cantidad')
+        ->first();
+
+        return $cantidad;
+    }
+
+    public function obtener_detalle($id){
+        
+        $detalles = tbl_detalle::select('tbl_productos.foto as foto',
+                                        'tbl_productos.nombre as nombre',
+                                        'tbl_productos.descripcion as descripcion',
+                                        'tbl_detalles.cantidad as cantidad',
+                                        'tbl_detalles.precio as precio',
+                                        'tbl_detalles.id as total')
+        ->join('tbl_productos','tbl_productos.id','=','tbl_detalles.id_producto')
+        ->where('tbl_detalles.id_factura','=',$id)->get();
+
+        $total = tbl_detalle::where('id_factura','=',$id)->sum('precio');
+
+        // for($i=0;$i<count($detalles);$i++){
+        //     $detalles[$i]->total = $total;
+        // }
+        //$detalles['total'] = $total;
+
+        //return $detalles;
+        //return (response()->json($detalles));
+        return view('ventas.ver_venta')->with('detalles',$detalles)->with('total',$total);
     }
 
     
