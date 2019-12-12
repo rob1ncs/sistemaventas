@@ -1,5 +1,8 @@
+
 <!doctype html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+        
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,6 +30,7 @@
         
     </head>
     <body>
+        @inject('categorias', 'App\Http\Controllers\TblCategoriaController')
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-inverse bg-white shadow-sm navbar-fixed-top" style="margin-bottom: 20px;">
                     <div class="container-fluid links">
@@ -35,8 +39,6 @@
                                 <a class="navbar-brand" href="{{ url('/') }}">
                                     &nbsp; INICIO &nbsp;
                                 </a>
-                            
-                            
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-left">
@@ -51,23 +53,28 @@
                                 </li>
                                 <li><a href="{{ url('/carrito') }}">Carrito de compras</a></li>
                                 <li><a href="{{ url('/factura') }}">Ver ventas</a></li>
+                                <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            Categorias <span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                @foreach ($categorias->get_categorias() as $index =>$categoria)
+                                                    <li><a href="{{ url('/producto_categoria/'.$index) }}">{{ $categoria }}</a></li>
+                                                @endforeach
+                                                
+                                            </ul>
+                                    </li>
                             </ul>
                         </div>
                     </div>
-                    
                 </nav>
                 <main role="main">
                     @yield('content')
-                    
                 </main>
-                
-                
         </div>
-        
     </body>
     <footer class="footer mt-auto py-3">
                 
-        </footer>
+    </footer>
 </html>
 
 

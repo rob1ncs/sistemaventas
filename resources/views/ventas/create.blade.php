@@ -4,13 +4,13 @@
 <div class="container">
             <div class="row">
                     <div class="col-sm-4">
-                        
-                    </div>
-                    <div class="col-sm-4">
-                        <h3><a href="{{ url('/') }}">Agregar nuevo producto</a></h3>
+                        <h3><a class="btn btn-warning btn-lg" href="{{ url('/') }}">Agregar nuevo producto</a></h3>
                     </div>
                     <div class="col-sm-4">
                         
+                    </div>
+                    <div class="col-sm-4">
+                        <h3><a class="btn btn-danger btn-lg" href="{{ url('/') }}">Regresar</a></h3>
                     </div>
             </div>
                 
@@ -46,9 +46,12 @@
                             @endforeach
                             <tfoot>
                                 <tr>
-                                    <td>
-                                        <a class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Generar boleta</a>
+                                    <td>@if(count($productos)>0)
+                                            <a class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal">Generar boleta</a>
+                                        @endif
                                     </td>
+                                    <td></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

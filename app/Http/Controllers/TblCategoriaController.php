@@ -15,7 +15,7 @@ class TblCategoriaController extends Controller
     public function index()
     {
         //
-        $datos['categorias'] = tbl_categoria::paginate(5);
+        $datos['categorias'] = tbl_categoria::get();
         return view('categorias.index',$datos);
         
     }
@@ -105,6 +105,15 @@ class TblCategoriaController extends Controller
     {
         $categorias = tbl_categoria::get();
         $categoriaArray[''] = 'Selecciona una categoria';
+        foreach($categorias as $cat){
+            $categoriaArray[$cat->id] = $cat->nombre;
+        }
+        return $categoriaArray; 
+    }
+
+    public function get_categorias()
+    {
+        $categorias = tbl_categoria::get();
         foreach($categorias as $cat){
             $categoriaArray[$cat->id] = $cat->nombre;
         }

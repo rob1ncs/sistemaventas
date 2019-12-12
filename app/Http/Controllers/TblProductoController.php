@@ -238,4 +238,8 @@ class TblProductoController extends Controller
         $estado->save();
     }
 
+    public function producto_categoria($id){
+        $datos['productos'] = tbl_producto::where('id_categoria','=',$id)->get();
+        return view('ventas.index',$datos);
+    }
 }
