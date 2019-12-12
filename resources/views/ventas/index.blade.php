@@ -3,6 +3,7 @@
 @section('content')
 
 
+
 <div class="container">
             <div class="row">
                     @foreach($productos as $producto)
@@ -46,6 +47,7 @@
                         <br><br>
                     </div>
                     @endforeach
+
             </div>
 </div>
 @endsection

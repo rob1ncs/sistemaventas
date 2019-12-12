@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+
             <div class="row">
                     <div class="col-sm-4">
                         <h3><a class="btn btn-warning btn-lg" href="{{ url('/') }}">Agregar nuevo producto</a></h3>
@@ -18,10 +19,12 @@
             <div class="row">
             <hr>
             
+
                 <div class="table-responsive">
                         <table class="table table-sm table-light table-hover">
                             <thead>
                                 <tr class="bg-primary">
+
                                     <th>Foto</th>
                                     <th>Nombre</th>
                                     <th>Precio</th>
@@ -49,10 +52,12 @@
                                     <td>@if(count($productos)>0)
                                             <a class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal">Generar boleta</a>
                                         @endif
+
                                     </td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
+
                                     <td></td>
                                     <td></td>
                                 </tr>

@@ -40,5 +40,8 @@ Route::resource('detalle', 'TblDetalleController');
 Route::resource('factura', 'TblFacturaController');
 
 
+Route::resource('detalle', 'TblDetalleController');
+
+
 
 //Route::get('/home', 'HomeController@index')->name('home');

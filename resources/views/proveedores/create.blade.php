@@ -5,6 +5,8 @@
 <div class="container">
         <form action="{{ url('/proveedores')}}" method="post" >
         {{ csrf_field() }}
+
+
             <div class="form-group row">
                 <h3>Crear proveedor</h3>
             </div>
