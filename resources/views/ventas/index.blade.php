@@ -4,16 +4,17 @@
 
 
 <div class="container">
+   
             <div class="row">
-                    @foreach($productos as $producto)
-                    <div class="col-sm-3">
+                @foreach($productos as $producto)
+                    <div class="col-lg-3">
                         <div class="card">
                             <img class="card-img-top" src="{{ URL::asset('storage/uploads').'/'.$producto->foto }}" alt="" style="width:75%;">
-                            <div class="card-body">
+                            <div class="card-body ">
                                 <h4 class="card-title">{{ $producto->nombre }}</h4>
-                                <p class="card-textarea" style="width: 100%">{{ $producto->descripcion }}</p>
+                                <p class="card-text text-justify" style="width: 100%">{{ $producto->descripcion }}</p>
                             </div>
-                            <div class="card-footer text-justify">
+                            <div class="card-footer">
                                 <form action="{{ url('/detalle')}}" method="post">
                                     {{ csrf_field() }}
                                     <input type="number" name="id" id="id" value="{{ $producto->id }}" style="display: none;">
@@ -39,11 +40,9 @@
                                         
                                     </small>
                                 </form>
-                            <br>
-                            <br>
                             </div>
                         </div>
-                        <br><br>
+                        <hr>
                     </div>
                     @endforeach
             </div>

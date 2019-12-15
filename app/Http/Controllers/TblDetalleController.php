@@ -162,7 +162,8 @@ class TblDetalleController extends Controller
 
     }
 
-    public function obtener_monto(){
+    public function obtener_monto()
+    {
 
         $monto = tbl_detalle::whereNull('id_factura')
         ->sum('precio');
@@ -171,7 +172,8 @@ class TblDetalleController extends Controller
     }
 
 
-    public function actualiza_detalle(){
+    public function actualiza_detalle()
+    {
 
         $id_factura = (new TblFacturaController)->get_id();
 
@@ -181,7 +183,8 @@ class TblDetalleController extends Controller
     }
 
 
-    public function obtener_stock($id){
+    public function obtener_stock($id)
+    {
 
         $cantidad = tbl_detalle::whereNull('id_factura')
         ->where('id_producto','=',$id)
@@ -191,7 +194,8 @@ class TblDetalleController extends Controller
         return $cantidad;
     }
 
-    public function obtener_detalle($id){
+    public function obtener_detalle($id)
+    {
         
         $detalles = tbl_detalle::select('tbl_productos.foto as foto',
                                         'tbl_productos.nombre as nombre',
