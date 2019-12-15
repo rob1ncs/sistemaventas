@@ -212,6 +212,7 @@ class TblProductoController extends Controller
         foreach($proveedores as $prov){
             $proveedorArray[$prov->id] = $stock->stock;
         }
+
         return $proveedorArray;
     }
 
@@ -241,5 +242,6 @@ class TblProductoController extends Controller
     public function producto_categoria($id){
         $datos['productos'] = tbl_producto::where('id_categoria','=',$id)->get();
         return view('ventas.index',$datos);
+
     }
 }

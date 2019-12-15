@@ -3,6 +3,7 @@
 @section('content')
 
 
+
 <div class="container">
    
             <div class="row">
@@ -45,6 +46,7 @@
                         <hr>
                     </div>
                     @endforeach
+
             </div>
 </div>
 @endsection

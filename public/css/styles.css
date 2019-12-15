@@ -20,10 +20,13 @@ table {
 
 th,
 td {
+
+
     width: 10%;
     text-align: justify;
     vertical-align: top;
     padding: 15px;
+
 }
 
 textarea {
@@ -33,4 +36,5 @@ textarea {
 #app {
     padding: 80px;
     background-color: whitesmoke;
+
 }

@@ -43,9 +43,11 @@ class TblDetalleController extends Controller
 
         $id_factura = (new TblFacturaController)->get_id();
 
+
         $detalle['id_producto'] = $datos['id'];
         $detalle['cantidad'] = $datos['stock'];
         $detalle['precio'] = $datos['precio'] * $datos['stock'];
+
 
         
         //$datosProducto=request()->except('_token');
@@ -85,6 +87,8 @@ class TblDetalleController extends Controller
         //return gettype($datosProducto);
         //return $productos;
         //return redirect('productos');
+
+
 
     }
 
