@@ -244,4 +244,21 @@ class TblProductoController extends Controller
         return view('ventas.index',$datos);
 
     }
+
+    public function ver_graficos(){
+
+        $facturas = (new TblFacturaController)->get();
+        //$productos = tbl_producto::where('campo_compra','=',"comprando")->get();
+
+        // $productos = tbl_producto::leftJoin('tbl_detalles',function($join){
+        //     $join->on('tbl_detalles.id_producto','=','tbl_productos.id');
+        // })
+        // ->select('tbl_productos.id as id','tbl_productos.foto','tbl_productos.nombre','tbl_productos.precio','tbl_detalles.precio as valor','tbl_detalles.cantidad')
+        // ->where('tbl_productos.campo_compra','=','comprando')
+        // ->whereNull('id_factura')
+        // ->get();
+
+        //return $facturas;
+        return view('ventas.graficos')->with('facturas',$facturas);
+    }
 }

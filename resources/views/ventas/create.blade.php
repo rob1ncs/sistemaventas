@@ -14,12 +14,9 @@
                         <h3><a class="btn btn-danger btn-lg" href="{{ url('/') }}">Regresar</a></h3>
                     </div>
             </div>
-                
-                
+
             <div class="row">
             <hr>
-            
-
                 <div class="table-responsive">
                         <table class="table table-sm table-light table-hover">
                             <thead>

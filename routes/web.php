@@ -30,6 +30,7 @@ Route::get('/generar_boleta','TblFacturaController@get_id');
 Route::get('/valida_cliente','TblClienteController@valida_cliente');
 Route::get('/obtener_detalle/{id}','TblDetalleController@obtener_detalle');
 Route::get('/producto_categoria/{id}','TblProductoController@producto_categoria');
+Route::get('/graficos','TblProductoController@ver_graficos');
 
 
 Route::resource('productos', 'TblProductoController');
@@ -38,8 +39,6 @@ Route::resource('categorias', 'TblCategoriaController');
 Route::resource('clientes', 'TblClienteController');
 Route::resource('detalle', 'TblDetalleController');
 Route::resource('factura', 'TblFacturaController');
-
-
 Route::resource('detalle', 'TblDetalleController');
 
 

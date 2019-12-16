@@ -63,6 +63,7 @@
                                                 
                                             </ul>
                                     </li>
+                                    <li><a href="{{ url('/graficos/') }}">Ofertones</a></li>
                             </ul>
                         </div>
                     </div>

@@ -7,6 +7,18 @@
 
 
 <div class="container">
+    {{-- <div class="row">
+        <div class="col-sm-4">
+            <h3><a class="btn btn-warning btn-lg" href="{{ url('/graficos/') }}">Ver grafica</a></h3>
+        </div>
+        <div class="col-sm-4">
+            
+        </div>
+        <div class="col-sm-4">
+            
+        </div>
+    </div>
+    <hr> --}}
         <table class="table table-light">
                 <thead class="thead-light">
                     <tr>

@@ -117,6 +117,13 @@ class TblFacturaController extends Controller
         //return view('productos.index',$datos);
     }
 
+    public function get(){
+
+        $facturas = tbl_factura::get();
+
+        return $facturas;
+    }
+
     
 
 

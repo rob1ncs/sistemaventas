@@ -4,7 +4,7 @@
 @inject('proveedores', 'App\Http\Controllers\TblProveedorController')
 @inject('categorias', 'App\Http\Controllers\TblCategoriaController')
 
-<div class="container" style="margin-top:80px;">
+<div class="container">
     <form action="{{ url('/productos')}}" method="post">
 
         {{ csrf_field() }}
