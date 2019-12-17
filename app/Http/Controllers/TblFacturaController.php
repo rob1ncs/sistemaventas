@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\tbl_factura;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TblFacturaController extends Controller
 {
@@ -119,9 +120,18 @@ class TblFacturaController extends Controller
 
     public function get(){
 
-        $facturas = tbl_factura::get();
+        $facturas = DB::table("tbl_facturas")
+	    ->select(DB::raw('SUM(total) as total, fecha'))
+        ->groupBy('fecha')
+        ->orderBy('total','DESC')
+	    ->get();
+        
+        
+
+        //$facturas = tbl_factura::select('*')->get();
 
         return $facturas;
+        //return (response()->json($facturas));
     }
 
     

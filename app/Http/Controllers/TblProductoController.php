@@ -260,5 +260,6 @@ class TblProductoController extends Controller
 
         //return $facturas;
         return view('ventas.graficos')->with('facturas',$facturas);
+        //return (response()->json($facturas));
     }
 }

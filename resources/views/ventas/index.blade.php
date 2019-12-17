@@ -5,7 +5,7 @@
 
 
 <div class="container">
-   
+            
             <div class="row">
                 @foreach($productos as $producto)
                     <div class="col-lg-3">

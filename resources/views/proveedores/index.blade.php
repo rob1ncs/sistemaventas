@@ -2,43 +2,46 @@
 
 @section('content')
 <div class="container">
-    <a class="btn btn-success" href="{{ url('proveedores/create') }}">Agregar Proveedor</a>
+    <a class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal">Agregar Proveedor</a>
     <hr>
-    <table class="table table-light">
-        <thead>
-            <tr  class="bg-primary">
-                <th>ITEM</th>
-                <th>NOMBRE</th>
-                <th>DIRECCION</th>
-                <th>TELEFONO</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-
-        <tbody>
-        @foreach($proveedores as $proveedor)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $proveedor->nombre }}</td>
-                <td>{{ $proveedor->direccion }}</td>
-                <td>{{ $proveedor->telefono }}</td>
-                <td>
-                    <a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-primary">
-                        editar
-                    </a>
-                </td>
-                <td>
-                    <form method="post" action="{{ url('/proveedores/'.$proveedor->id) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <button class="btn btn-danger" type="submit" onclick="return confirm('¿ Está seguro ?')">Borrar</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    <div class="jumbotron jumbotron-fluid">
+        <table class="table table-light">
+            <thead>
+                <tr  class="bg-primary">
+                    <th>ITEM</th>
+                    <th>NOMBRE</th>
+                    <th>DIRECCION</th>
+                    <th>TELEFONO</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+    
+            <tbody>
+            @foreach($proveedores as $proveedor)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $proveedor->nombre }}</td>
+                    <td>{{ $proveedor->direccion }}</td>
+                    <td>{{ $proveedor->telefono }}</td>
+                    <td>
+                        <a href="{{ url('/proveedores/'.$proveedor->id.'/edit') }}" class="btn btn-primary">
+                            editar
+                        </a>
+                    </td>
+                    <td>
+                        <form method="post" action="{{ url('/proveedores/'.$proveedor->id) }}">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('¿ Está seguro ?')">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+    
 </div>
 
 {{-- MODAL --}}
@@ -72,7 +75,7 @@
                                             
                                                     <input type="number" name="telefono" class="form-control" id="telefono" required>
                                                     
-                                            </div>
+                                                </div>
                                                 
                                             </div>
                                                   

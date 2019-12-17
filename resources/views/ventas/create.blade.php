@@ -15,9 +15,11 @@
                     </div>
             </div>
 
-            <div class="row">
+            
             <hr>
-                <div class="table-responsive">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="row">
+                    <div class="table-responsive">
                         <table class="table table-sm table-light table-hover">
                             <thead>
                                 <tr class="bg-primary">
@@ -54,13 +56,13 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-
                                     <td></td>
                                     <td></td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
+                </div>
             </div>
     </div>
 

@@ -7,9 +7,11 @@
 @inject('categorias', 'App\Http\Controllers\TblCategoriaController')
 {{-- href="{{ url('productos/create') }}" --}}
 <div class="container">
-    <a class="btn btn-success"  data-toggle="modal" data-target="#exampleModal">Agregar producto</a>
+
+    <a class="btn btn-success btn-lg"  data-toggle="modal" data-target="#exampleModal">Agregar producto</a>
     <hr>
-    <div class="table-responsive">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="table-responsive">
             <table class="table table-light table-hover table-condensed">
                 <thead>
                     <tr class="bg-primary">
@@ -26,7 +28,7 @@
                 </thead>
                 <tbody>
                     @foreach($productos as $producto)
-                        <tr>
+                        <tr >
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $producto->nombre }}</td>
                             <td>{{ $producto->descripcion }}</td>
@@ -61,6 +63,8 @@
                 </tbody>
             </table>
     </div>
+    </div>
+    
 </div>
 
  {{-- MODAL --}}

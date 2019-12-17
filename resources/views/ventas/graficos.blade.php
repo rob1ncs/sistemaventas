@@ -8,52 +8,65 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    
-                        {{-- <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                          Link with href
-                        </a> --}}
-                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-                          Button with data-target
-                        </button>
-                    
-                    <div class="collapse" id="collapseExample1">
-                        <div class="card card-body">
-                            <table>
+                    <div class="card card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-light table-hover">
                                 <thead>
-
+                                    <tr class="bg-primary">
+                                        <th>Fecha</th>
+                                        <th>Total</th>
+                                    </tr>
                                 </thead>
+                                @foreach($facturas as $fac)
                                 <tbody>
-                                    <tr>
-                                        @foreach($facturas as $fac)
+                                        <tr>
                                             <td>{{ $fac->fecha }}</td>
                                             <td>{{ $fac->total }}</td>
-                                            <td>{{ $fac->medio_pago }}</td>
-                                        @endforeach
-                                    </tr>
+                                        </tr>
                                 </tbody>
-                                
+                                @endforeach
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
                             </table>
-                            
                         </div>
+                        
+                    </div>
+                        
+                </div>
+                
+                
+                
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card-body">
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+                            Productos
+                          </button>
+                        <hr>
+                        <div class="collapse" id="collapseExample2">
+                            <div class="card card-body">
+                                <h2>LALA</h2>
+                            </div>
+                        </div>
+                      
                     </div>
                 </div>
                 <div class="col-sm-6">
-                        {{-- <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                          Link with href
-                        </a> --}}
-                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-                          Button with data-target
+                    <div class="card-body">
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                            Categorias
                         </button>
-                    
-                    
-                    <div class="collapse" id="collapseExample2">
-                        <div class="card card-body">
-                            <h2>LALA</h2>
+                        <hr>
+                        <div class="collapse" id="collapseExample1">
+                            <h2>LELE</h2>
                         </div>
                     </div>
                 </div>
-                
-                
             </div>
             
             
