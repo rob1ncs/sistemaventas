@@ -6,14 +6,14 @@
 
 <div class="container">
             
-            <div class="row">
+            <div class="row ">
                 @foreach($productos as $producto)
-                    <div class="col-lg-3">
-                        <div class="card">
+                    <div class="col-md-3">
+                        <div class="card card-columns">
                             <img class="card-img-top" src="{{ URL::asset('storage/uploads').'/'.$producto->foto }}" alt="" style="width:75%;">
                             <div class="card-body ">
-                                <h4 class="card-title">{{ $producto->nombre }}</h4>
-                                <p class="card-text text-justify" style="width: 100%">{{ $producto->descripcion }}</p>
+                                <h4 class="card-title" >{{ $producto->nombre }}</h4>
+                                <span class="card-text" style="width: auto;">{{ $producto->descripcion }}</span>
                             </div>
                             <div class="card-footer">
                                 <form action="{{ url('/detalle')}}" method="post">
@@ -30,7 +30,6 @@
                                             Unidades
                                         </small>
                                     @endif
-                                    
                                     <small>
                                             <h4>${{ $producto->precio }}</h4>
                                             @if($producto->campo_compra == 'comprando')
@@ -45,6 +44,7 @@
                         </div>
                         <hr>
                     </div>
+                    
                     @endforeach
 
             </div>

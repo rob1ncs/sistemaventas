@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+@inject('getproductos', 'App\Http\Controllers\TblProductoController')
 
 <div class="container">
    
@@ -44,34 +44,116 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card-body">
-                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-                            Productos
-                          </button>
-                        <hr>
-                        <div class="collapse" id="collapseExample2">
                             <div class="card card-body">
-                                <h2>LALA</h2>
+                                <h2>Productos</h2>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-light table-hover">
+                                        <thead>
+                                            <tr class="bg-primary">
+                                                <th>Producto</th>
+                                                <th style="text-align: center">Total</th>
+                                            </tr>
+                                        </thead>
+                                        @foreach($productos as $prod)
+                                        <tbody>
+                                                <tr>
+                                                    <td>{{ $prod->nombre }}</td>
+                                                    <td style="text-align: center">{{ $prod->total }}</td>
+                                                </tr>
+                                        </tbody>
+                                        @endforeach
+                                        <tfoot>
+                                            <form action="">
+                                            <tr>
+                                                <td>
+                                                    <label for="id_producto" class="col-form-label">{{ 'Producto' }}</label>
+                                                    <select name="id_producto" id="id_producto" class="form-control" required>
+                                                        @foreach ($getproductos->get_productos() as $index =>$producto)
+                                                            <option value="{{ $index }}" {{ old('id') == $index ? 'selected': '' }}>
+                                                                {{ $producto }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="id_producto" class="col-form-label">{{ '% Descuento' }}</label>
+                                                    <input type="text" id="porcentaje" class="form-control" required>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button type="submit" class="btn btn-success">Generar combo</button>
+                                                </td>
+                                            </tr>
+                                        </form>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                       
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card-body">
-                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-                            Categorias
-                        </button>
-                        <hr>
-                        <div class="collapse" id="collapseExample1">
-                            <h2>LELE</h2>
+                    <div class="col-sm-6">
+                        <div class="card-body">
+                            <h2>Categorias</h2>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-light table-hover">
+                                    <thead>
+                                        <tr class="bg-primary">
+                                            <th>Producto</th>
+                                            <th style="text-align: center">Total</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach($productos as $prod)
+                                    <tbody>
+                                            <tr>
+                                                <td>{{ $prod->nombre }}</td>
+                                                <td style="text-align: center">{{ $prod->total }}</td>
+                                            </tr>
+                                    </tbody>
+                                    @endforeach
+                                    <tfoot>
+                                        <form action="">
+                                        <tr>
+                                            <td>
+                                                <label for="id_categoria" class="col-form-label">{{ 'Categoria' }}</label>
+                                                <select name="id_categoria" id="id_categoria" class="form-control" required>
+                                                    @foreach ($categorias->get() as $index =>$categoria)
+                                                        <option value="{{ $index }}" {{ old('id') == $index ? 'selected': '' }}>
+                                                            {{ $categoria }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="descuento" class="col-form-label">{{ '% Descuento' }}</label>
+                                                <input id="descuento" type="text" id="porcentaje" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button type="submit" class="btn btn-success">Generar combo</button>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
-            
-            
-            
+                
         </div>
+            
+            
+            
+        
             
     
     

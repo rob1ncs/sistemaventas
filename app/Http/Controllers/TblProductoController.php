@@ -248,6 +248,8 @@ class TblProductoController extends Controller
     public function ver_graficos(){
 
         $facturas = (new TblFacturaController)->get();
+
+        $productos = (new TblDetalleController)->get_productos();
         //$productos = tbl_producto::where('campo_compra','=',"comprando")->get();
 
         // $productos = tbl_producto::leftJoin('tbl_detalles',function($join){
@@ -259,7 +261,18 @@ class TblProductoController extends Controller
         // ->get();
 
         //return $facturas;
-        return view('ventas.graficos')->with('facturas',$facturas);
+        return view('ventas.graficos')->with('facturas',$facturas)->with('productos',$productos);
         //return (response()->json($facturas));
     }
+
+    public function get_productos()
+    {
+        $productos = tbl_producto::get();
+        $productosArray[''] = 'Selecciona un producto';
+        foreach($productos as $prod){
+            $productosArray[$prod->id] = $prod->nombre;
+        }
+        return $productosArray; 
+    }
+   
 }

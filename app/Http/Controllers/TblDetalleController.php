@@ -222,5 +222,18 @@ class TblDetalleController extends Controller
         return view('ventas.ver_venta')->with('detalles',$detalles)->with('total',$total);
     }
 
+    public function get_productos(){
+
+        $productos = DB::table("tbl_detalles")
+        ->join('tbl_productos','tbl_productos.id','=','tbl_detalles.id_producto')
+        ->select(DB::raw('COUNT(tbl_detalles.id_producto) as total, tbl_productos.nombre'))
+        ->groupBy('id_producto','nombre')
+        ->orderBy('total','DESC')
+        ->get();
+
+        
+        
+        return $productos;
+    }
     
 }
