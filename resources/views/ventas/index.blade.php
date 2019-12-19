@@ -31,12 +31,20 @@
                                         </small>
                                     @endif
                                     <small>
+                                        @if($producto->campo_descuento != null)
+                                            <p>Antes <strike>${{ $producto->precio }}</strike></p>
+                                            <h4>${{ $producto->campo_descuento }}</h4>
+                                            <input type="number" name="campo_descuento" id="campo_descuento" value="{{ $producto->campo_descuento }}" style="display: none;">
+                                            
+                                        @else
                                             <h4>${{ $producto->precio }}</h4>
-                                            @if($producto->campo_compra == 'comprando')
-                                                <input type="submit" class="btn btn-danger" value="Producto en carrito" disabled>
-                                            @else
-                                                <input type="submit" class="btn btn-primary" value="Añadir al carrito">
-                                            @endif
+                                        @endif
+                                        
+                                        @if($producto->campo_compra == 'comprando')
+                                            <input type="submit" class="btn btn-danger" value="Producto en carrito" disabled>
+                                        @else
+                                            <input type="submit" class="btn btn-primary" value="Añadir al carrito">
+                                        @endif
                                         
                                     </small>
                                 </form>

@@ -73,7 +73,7 @@
                                                         <textarea name="descripcion" class="form-control" id="descripcion" required></textarea>
                                                         
                                                 </div>
-                                    </div>
+                                            </div>
                                         
                                 </div>
                                 <div class="modal-footer">

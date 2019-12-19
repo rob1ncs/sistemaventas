@@ -250,6 +250,10 @@ class TblProductoController extends Controller
         $facturas = (new TblFacturaController)->get();
 
         $productos = (new TblDetalleController)->get_productos();
+
+        $categorias = (new TblDetalleController)->get_categorias();
+
+
         //$productos = tbl_producto::where('campo_compra','=',"comprando")->get();
 
         // $productos = tbl_producto::leftJoin('tbl_detalles',function($join){
@@ -261,9 +265,11 @@ class TblProductoController extends Controller
         // ->get();
 
         //return $facturas;
-        return view('ventas.graficos')->with('facturas',$facturas)->with('productos',$productos);
+        return view('ventas.graficos')->with('facturas',$facturas)->with('productos',$productos)->with('categorias',$categorias);
         //return (response()->json($facturas));
     }
+
+
 
     public function get_productos()
     {
@@ -273,6 +279,24 @@ class TblProductoController extends Controller
             $productosArray[$prod->id] = $prod->nombre;
         }
         return $productosArray; 
+    }
+
+    public function actualiza_precio(Request $request){
+
+        $datos=request()->except('_token');
+
+
+        $producto = tbl_producto::where('id','=',$datos['id_producto'])->first();
+
+        $nuevoPrecio = ($datos['porcentaje'] * $producto->precio)/100;
+
+        
+        $producto->campo_descuento = ($producto->precio - $nuevoPrecio);
+        $producto->save();
+
+
+        $datos['productos'] = tbl_producto::where('estado','=','activo')->get();
+        return view('ventas.index',$datos);
     }
    
 }

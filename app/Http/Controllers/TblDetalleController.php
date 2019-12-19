@@ -43,17 +43,15 @@ class TblDetalleController extends Controller
 
         $id_factura = (new TblFacturaController)->get_id();
 
+        if($datos['campo_descuento']){
+            $detalle['precio'] = $datos['campo_descuento'] * $datos['stock'];
+        }else{
+            $detalle['precio'] = $datos['precio'] * $datos['stock'];
+        }
 
         $detalle['id_producto'] = $datos['id'];
         $detalle['cantidad'] = $datos['stock'];
-        $detalle['precio'] = $datos['precio'] * $datos['stock'];
-
-
         
-        //$datosProducto=request()->except('_token');
-        
-        //$datos['detalle'] = tbl_detalle::get();
-        //$id_detalle = $datos->$id_detalle;
 
         $id_producto = tbl_detalle::whereNull('id_factura')
         ->where('id_producto','=',$datos['id'])
@@ -64,13 +62,9 @@ class TblDetalleController extends Controller
             tbl_detalle::insert($detalle);
         }
 
-        #Se actualiza estado en el producto
+        
         $res_producto = (new TblProductoController)->estado_comprando($datos['id']);
-        //$res_detalle = tbl_detalle::whereNull('id_factura')->select('id_producto','cantidad','precio')->get();
-
-        // $productos = tbl_detalle::whereNull('id_factura')
-        // ->join('tbl_productos, tbl_detalles','id','=','id_producto')
-        // ->select('foto','nombre','cantidad','precio')->get();
+        
         
 
         $productos = tbl_detalle::leftJoin('tbl_productos',function($join){
@@ -236,4 +230,19 @@ class TblDetalleController extends Controller
         return $productos;
     }
     
+
+    public function get_categorias(){
+
+        $categorias = DB::table("tbl_detalles")
+        ->join('tbl_productos','tbl_productos.id','=','tbl_detalles.id_producto')
+        ->join('tbl_categorias','tbl_categorias.id','=','tbl_productos.id_categoria')
+        ->select(DB::raw('COUNT(tbl_detalles.id_producto) as total, tbl_categorias.nombre'))
+        ->groupBy('nombre')
+        ->orderBy('total','DESC')
+        ->get();
+
+        
+        
+        return $categorias;
+    }
 }

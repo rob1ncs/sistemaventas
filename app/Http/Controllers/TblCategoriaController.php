@@ -119,4 +119,7 @@ class TblCategoriaController extends Controller
         }
         return $categoriaArray; 
     }
+
+
+    
 }

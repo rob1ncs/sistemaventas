@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCampos extends Migration
+class CampoOferta extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class AddCampos extends Migration
      */
     public function up()
     {
+        //
         Schema::table('tbl_productos', function (Blueprint $table) {
 
-            $table->number('campo_descuento')->nullable();
+            $table->integer('campo_descuento')->nullable();
 
         });
-
     }
 
     /**
