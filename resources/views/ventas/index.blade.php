@@ -7,8 +7,8 @@
 <div class="container">
             
             <div class="row ">
-                @foreach($productos as $producto)
-                    <div class="col-md-3">
+                    @foreach($productos as $producto)
+                    <div class="col-md-5">
                         <div class="card card-columns">
                             <img class="card-img-top" src="{{ URL::asset('storage/uploads').'/'.$producto->foto }}" alt="" style="width:75%;">
                             <div class="card-body ">
@@ -32,11 +32,19 @@
                                     @endif
                                     <small>
                                         @if($producto->campo_descuento != null)
-                                            <p>Antes <strike>${{ $producto->precio }}</strike></p>
-                                            <h4>${{ $producto->campo_descuento }}</h4>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <h5>Antes <strike>${{ $producto->precio }}</strike></h5>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <h4>{{ $producto->descuento }}% Desc. &nbsp;  ${{ $producto->campo_descuento }}</h4>
+                                            </div>
+                                        </div>
+                                            
                                             <input type="number" name="campo_descuento" id="campo_descuento" value="{{ $producto->campo_descuento }}" style="display: none;">
                                             
                                         @else
+                                            <br>
                                             <h4>${{ $producto->precio }}</h4>
                                         @endif
                                         
@@ -52,8 +60,11 @@
                         </div>
                         <hr>
                     </div>
-                    
                     @endforeach
+                
+                    
+                    
+               
 
             </div>
 </div>

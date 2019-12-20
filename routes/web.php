@@ -32,6 +32,7 @@ Route::get('/obtener_detalle/{id}','TblDetalleController@obtener_detalle');
 Route::get('/producto_categoria/{id}','TblProductoController@producto_categoria');
 Route::get('/graficos','TblProductoController@ver_graficos');
 Route::get('/actualiza_precio','TblProductoController@actualiza_precio');
+Route::get('/eliminar_oferta/{id}','TblProductoController@eliminar_oferta');
 
 
 Route::resource('productos', 'TblProductoController');

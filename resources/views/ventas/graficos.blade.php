@@ -10,6 +10,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card card-body">
+                        <h2>Ventas</h2>
                         <div class="table-responsive">
                             <table class="table table-sm table-light table-hover">
                                 <thead>
@@ -32,6 +33,46 @@
                                         <td></td>
                                     </tr>
                                 </tfoot>
+                            </table>
+                        </div>
+                        
+                    </div>
+                        
+                </div>
+                <div class="col-sm-6">
+                    <div class="card card-body">
+                        <h2>Descuentos</h2>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-light table-hover">
+                                <thead>
+                                    <tr class="bg-primary">
+                                        <th>Nombre</th>
+                                        <th style="text-align: center">Descuento</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                @foreach($descuentos as $desc)
+                                <tbody>
+                                        <tr>
+                                            <td>{{ $desc->nombre }}</td>
+                                            <td style="text-align: center">{{ $desc->descuento }}%</td>
+                                            <td>
+                                                <a class="btn btn-danger" href="{{ url('/eliminar_oferta/'.$desc->id) }}">
+                                                    Eliminar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                                @endforeach
+                                <tfoot>
+                                    <tr>
+                                        <td>
+                                            
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                                
                             </table>
                         </div>
                         
@@ -83,8 +124,8 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <label for="porcentaje" class="col-form-label">{{ '% Descuento' }}</label>
-                                                            <input type="text" name="porcentaje" id="porcentaje" class="form-control" required>
+                                                            <label for="descuento" class="col-form-label">{{ '% Descuento' }}</label>
+                                                            <input type="text" name="descuento" id="descuento" class="form-control" required>
                                                         </td>
                                                     </tr>
                                                     <tr>
